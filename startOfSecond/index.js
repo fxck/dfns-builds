@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = startOfSecond;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name startOfSecond
@@ -20,8 +31,9 @@ import toDate from '../toDate/index.js'
  * var result = startOfSecond(new Date(2014, 11, 1, 22, 15, 45, 400))
  * //=> Mon Dec 01 2014 22:15:45.000
  */
-export default function startOfSecond (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  date.setMilliseconds(0)
-  return date
+function startOfSecond(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  date.setMilliseconds(0);
+  return date;
 }
+module.exports = exports['default'];

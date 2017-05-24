@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isEqual;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isEqual
@@ -23,8 +34,9 @@ import toDate from '../toDate/index.js'
  * )
  * //=> false
  */
-export default function isEqual (dirtyLeftDate, dirtyRightDate, dirtyOptions) {
-  var dateLeft = toDate(dirtyLeftDate, dirtyOptions)
-  var dateRight = toDate(dirtyRightDate, dirtyOptions)
-  return dateLeft.getTime() === dateRight.getTime()
+function isEqual(dirtyLeftDate, dirtyRightDate, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyLeftDate, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyRightDate, dirtyOptions);
+  return dateLeft.getTime() === dateRight.getTime();
 }
+module.exports = exports['default'];

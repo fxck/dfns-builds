@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     one: {
@@ -130,41 +136,41 @@ var formatDistanceLocale = {
     dual: 'gotovo {{count}} godine',
     other: 'gotovo {{count}} godina'
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var result
+  var result;
 
   if (typeof formatDistanceLocale[token] === 'string') {
-    result = formatDistanceLocale[token]
+    result = formatDistanceLocale[token];
   } else if (count === 1) {
     if (options.addSuffix) {
       if (options.comparison > 0) {
-        result = formatDistanceLocale[token].one.withPrepositionIn
+        result = formatDistanceLocale[token].one.withPrepositionIn;
       } else {
-        result = formatDistanceLocale[token].one.withPrepositionAgo
+        result = formatDistanceLocale[token].one.withPrepositionAgo;
       }
     } else {
-      result = formatDistanceLocale[token].one.standalone
+      result = formatDistanceLocale[token].one.standalone;
     }
-  } else if (
-    count % 10 > 1 && count % 10 < 5 && // if last digit is between 2 and 4
-    String(count).substr(-2, 1) !== '1' // unless the 2nd to last digit is "1"
+  } else if (count % 10 > 1 && count % 10 < 5 && // if last digit is between 2 and 4
+  String(count).substr(-2, 1) !== '1' // unless the 2nd to last digit is "1"
   ) {
-    result = formatDistanceLocale[token].dual.replace('{{count}}', count)
-  } else {
-    result = formatDistanceLocale[token].other.replace('{{count}}', count)
+      result = formatDistanceLocale[token].dual.replace('{{count}}', count);
+    } else {
+    result = formatDistanceLocale[token].other.replace('{{count}}', count);
   }
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
-      return 'za ' + result
+      return 'za ' + result;
     } else {
-      return 'prije ' + result
+      return 'prije ' + result;
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

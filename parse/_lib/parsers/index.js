@@ -1,3 +1,8 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var patterns = {
   'M': /^(1[0-2]|0?\d)/, // 0 to 12
   'D': /^(3[0-1]|[0-2]?\d)/, // 0 to 31
@@ -13,10 +18,10 @@ var patterns = {
   threeDigits: /^(\d{3})/,
   fourDigits: /^(\d{4})/,
   anyDigits: /^(\d+)/
-}
+};
 
-function parseDecimal (matchResult) {
-  return parseInt(matchResult[1], 10)
+function parseDecimal(matchResult) {
+  return parseInt(matchResult[1], 10);
 }
 
 var parsers = {
@@ -24,8 +29,8 @@ var parsers = {
   'YY': {
     unit: 'twoDigitYear',
     match: patterns.twoDigits,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult)
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult);
     }
   },
 
@@ -40,8 +45,8 @@ var parsers = {
   'GG': {
     unit: 'isoYear',
     match: patterns.twoDigits,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) + 1900
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) + 1900;
     }
   },
 
@@ -62,11 +67,11 @@ var parsers = {
   // Ordinal quarter
   'Qo': {
     unit: 'quarter',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'quarter'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'quarter' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'quarter'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'quarter' });
     }
   },
 
@@ -74,19 +79,19 @@ var parsers = {
   'M': {
     unit: 'month',
     match: patterns.M,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) - 1
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) - 1;
     }
   },
 
   // Ordinal month
   'Mo': {
     unit: 'month',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'month'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'month' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'month'}) - 1
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'month' }) - 1;
     }
   },
 
@@ -94,37 +99,36 @@ var parsers = {
   'MM': {
     unit: 'month',
     match: patterns.twoDigits,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) - 1
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) - 1;
     }
   },
 
   // Month: Jan, Feb, ..., Dec
   'MMM': {
     unit: 'month',
-    match: function (string, options) {
-      return options.locale.match.months(string, {type: 'short'})
+    match: function match(string, options) {
+      return options.locale.match.months(string, { type: 'short' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.month(matchResult, {type: 'short'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.month(matchResult, { type: 'short' });
     }
   },
 
   // Month: January, February, ..., December
   'MMMM': {
     unit: 'month',
-    match: function (string, options) {
-      return options.locale.match.months(string, {type: 'long'}) ||
-        options.locale.match.months(string, {type: 'short'})
+    match: function match(string, options) {
+      return options.locale.match.months(string, { type: 'long' }) || options.locale.match.months(string, { type: 'short' });
     },
-    parse: function (matchResult, options) {
-      var parseResult = options.locale.match.month(matchResult, {type: 'long'})
+    parse: function parse(matchResult, options) {
+      var parseResult = options.locale.match.month(matchResult, { type: 'long' });
 
       if (parseResult == null) {
-        parseResult = options.locale.match.month(matchResult, {type: 'short'})
+        parseResult = options.locale.match.month(matchResult, { type: 'short' });
       }
 
-      return parseResult
+      return parseResult;
     }
   },
 
@@ -138,11 +142,11 @@ var parsers = {
   // Ordinal ISO week
   'Wo': {
     unit: 'isoWeek',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'isoWeek'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'isoWeek' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'isoWeek'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'isoWeek' });
     }
   },
 
@@ -163,63 +167,60 @@ var parsers = {
   // Ordinal day of week
   'do': {
     unit: 'dayOfWeek',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'dayOfWeek'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'dayOfWeek' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'dayOfWeek'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'dayOfWeek' });
     }
   },
 
   // Day of week: Su, Mo, ..., Sa
   'dd': {
     unit: 'dayOfWeek',
-    match: function (string, options) {
-      return options.locale.match.weekdays(string, {type: 'narrow'})
+    match: function match(string, options) {
+      return options.locale.match.weekdays(string, { type: 'narrow' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.weekday(matchResult, {type: 'narrow'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.weekday(matchResult, { type: 'narrow' });
     }
   },
 
   // Day of week: Sun, Mon, ..., Sat
   'ddd': {
     unit: 'dayOfWeek',
-    match: function (string, options) {
-      return options.locale.match.weekdays(string, {type: 'short'}) ||
-        options.locale.match.weekdays(string, {type: 'narrow'})
+    match: function match(string, options) {
+      return options.locale.match.weekdays(string, { type: 'short' }) || options.locale.match.weekdays(string, { type: 'narrow' });
     },
-    parse: function (matchResult, options) {
-      var parseResult = options.locale.match.weekday(matchResult, {type: 'short'})
+    parse: function parse(matchResult, options) {
+      var parseResult = options.locale.match.weekday(matchResult, { type: 'short' });
 
       if (parseResult == null) {
-        parseResult = options.locale.match.weekday(matchResult, {type: 'narrow'})
+        parseResult = options.locale.match.weekday(matchResult, { type: 'narrow' });
       }
 
-      return parseResult
+      return parseResult;
     }
   },
 
   // Day of week: Sunday, Monday, ..., Saturday
   'dddd': {
     unit: 'dayOfWeek',
-    match: function (string, options) {
-      return options.locale.match.weekdays(string, {type: 'long'}) ||
-        options.locale.match.weekdays(string, {type: 'short'}) ||
-        options.locale.match.weekdays(string, {type: 'narrow'})
+    match: function match(string, options) {
+      return options.locale.match.weekdays(string, { type: 'long' }) || options.locale.match.weekdays(string, { type: 'short' }) || options.locale.match.weekdays(string, { type: 'narrow' });
     },
-    parse: function (matchResult, options) {
-      var parseResult = options.locale.match.weekday(matchResult, {type: 'long'})
+    parse: function parse(matchResult, options) {
+      var parseResult = options.locale.match.weekday(matchResult, { type: 'long' });
 
       if (parseResult == null) {
-        parseResult = options.locale.match.weekday(matchResult, {type: 'short'})
+        parseResult = options.locale.match.weekday(matchResult, { type: 'short' });
 
         if (parseResult == null) {
-          parseResult = options.locale.match.weekday(matchResult, {type: 'narrow'})
+          parseResult = options.locale.match.weekday(matchResult, { type: 'narrow' });
         }
       }
 
-      return parseResult
+      return parseResult;
     }
   },
 
@@ -227,8 +228,8 @@ var parsers = {
   'E': {
     unit: 'dayOfISOWeek',
     match: patterns.singleDigit,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult)
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult);
     }
   },
 
@@ -242,11 +243,11 @@ var parsers = {
   // Ordinal day of month
   'Do': {
     unit: 'dayOfMonth',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'dayOfMonth'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'dayOfMonth' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'dayOfMonth'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'dayOfMonth' });
     }
   },
 
@@ -267,11 +268,11 @@ var parsers = {
   // Ordinal day of year
   'DDDo': {
     unit: 'dayOfYear',
-    match: function (string, options) {
-      return options.locale.match.ordinalNumbers(string, {unit: 'dayOfYear'})
+    match: function match(string, options) {
+      return options.locale.match.ordinalNumbers(string, { unit: 'dayOfYear' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.ordinalNumber(matchResult, {unit: 'dayOfYear'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.ordinalNumber(matchResult, { unit: 'dayOfYear' });
     }
   },
 
@@ -285,29 +286,28 @@ var parsers = {
   // AM, PM
   'A': {
     unit: 'timeOfDay',
-    match: function (string, options) {
-      return options.locale.match.timesOfDay(string, {type: 'short'})
+    match: function match(string, options) {
+      return options.locale.match.timesOfDay(string, { type: 'short' });
     },
-    parse: function (matchResult, options) {
-      return options.locale.match.timeOfDay(matchResult, {type: 'short'})
+    parse: function parse(matchResult, options) {
+      return options.locale.match.timeOfDay(matchResult, { type: 'short' });
     }
   },
 
   // a.m., p.m.
   'aa': {
     unit: 'timeOfDay',
-    match: function (string, options) {
-      return options.locale.match.timesOfDay(string, {type: 'long'}) ||
-        options.locale.match.timesOfDay(string, {type: 'short'})
+    match: function match(string, options) {
+      return options.locale.match.timesOfDay(string, { type: 'long' }) || options.locale.match.timesOfDay(string, { type: 'short' });
     },
-    parse: function (matchResult, options) {
-      var parseResult = options.locale.match.timeOfDay(matchResult, {type: 'long'})
+    parse: function parse(matchResult, options) {
+      var parseResult = options.locale.match.timeOfDay(matchResult, { type: 'long' });
 
       if (parseResult == null) {
-        parseResult = options.locale.match.timeOfDay(matchResult, {type: 'short'})
+        parseResult = options.locale.match.timeOfDay(matchResult, { type: 'short' });
       }
 
-      return parseResult
+      return parseResult;
     }
   },
 
@@ -371,8 +371,8 @@ var parsers = {
   'S': {
     unit: 'milliseconds',
     match: patterns.singleDigit,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) * 100
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) * 100;
     }
   },
 
@@ -380,8 +380,8 @@ var parsers = {
   'SS': {
     unit: 'milliseconds',
     match: patterns.twoDigits,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) * 10
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) * 10;
     }
   },
 
@@ -396,12 +396,12 @@ var parsers = {
   'Z': {
     unit: 'timezone',
     match: patterns.Z,
-    parse: function (matchResult) {
-      var sign = matchResult[1]
-      var hours = parseInt(matchResult[2], 10)
-      var minutes = parseInt(matchResult[3], 10)
-      var absoluteOffset = hours * 60 + minutes
-      return (sign === '+') ? absoluteOffset : -absoluteOffset
+    parse: function parse(matchResult) {
+      var sign = matchResult[1];
+      var hours = parseInt(matchResult[2], 10);
+      var minutes = parseInt(matchResult[3], 10);
+      var absoluteOffset = hours * 60 + minutes;
+      return sign === '+' ? absoluteOffset : -absoluteOffset;
     }
   },
 
@@ -409,12 +409,12 @@ var parsers = {
   'ZZ': {
     unit: 'timezone',
     match: patterns.ZZ,
-    parse: function (matchResult) {
-      var sign = matchResult[1]
-      var hours = parseInt(matchResult[2], 10)
-      var minutes = parseInt(matchResult[3], 10)
-      var absoluteOffset = hours * 60 + minutes
-      return (sign === '+') ? absoluteOffset : -absoluteOffset
+    parse: function parse(matchResult) {
+      var sign = matchResult[1];
+      var hours = parseInt(matchResult[2], 10);
+      var minutes = parseInt(matchResult[3], 10);
+      var absoluteOffset = hours * 60 + minutes;
+      return sign === '+' ? absoluteOffset : -absoluteOffset;
     }
   },
 
@@ -422,8 +422,8 @@ var parsers = {
   'X': {
     unit: 'timestamp',
     match: patterns.anyDigits,
-    parse: function (matchResult) {
-      return parseDecimal(matchResult) * 1000
+    parse: function parse(matchResult) {
+      return parseDecimal(matchResult) * 1000;
     }
   },
 
@@ -433,8 +433,9 @@ var parsers = {
     match: patterns.anyDigits,
     parse: parseDecimal
   }
-}
+};
 
-parsers['a'] = parsers['A']
+parsers['a'] = parsers['A'];
 
-export default parsers
+exports.default = parsers;
+module.exports = exports['default'];

@@ -1,5 +1,19 @@
-import getISOYear from '../getISOYear/index.js'
-import setISOYear from '../setISOYear/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addISOYears;
+
+var _index = require('../getISOYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../setISOYear/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addISOYears
@@ -23,7 +37,8 @@ import setISOYear from '../setISOYear/index.js'
  * var result = addISOYears(new Date(2010, 6, 2), 5)
  * //=> Fri Jun 26 2015 00:00:00
  */
-export default function addISOYears (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return setISOYear(dirtyDate, getISOYear(dirtyDate, dirtyOptions) + amount, dirtyOptions)
+function addISOYears(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index4.default)(dirtyDate, (0, _index2.default)(dirtyDate, dirtyOptions) + amount, dirtyOptions);
 }
+module.exports = exports['default'];

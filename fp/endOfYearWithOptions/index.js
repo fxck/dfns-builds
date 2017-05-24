@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../endOfYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../endOfYear/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var endOfYearWithOptions = (0, _index4.default)(_index2.default, 2);
 
-var endOfYearWithOptions = convertToFP(fn, 2)
-
-export default endOfYearWithOptions
+exports.default = endOfYearWithOptions;
+module.exports = exports['default'];

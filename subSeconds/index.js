@@ -1,4 +1,15 @@
-import addSeconds from '../addSeconds/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = subSeconds;
+
+var _index = require('../addSeconds/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name subSeconds
@@ -20,7 +31,8 @@ import addSeconds from '../addSeconds/index.js'
  * var result = subSeconds(new Date(2014, 6, 10, 12, 45, 0), 30)
  * //=> Thu Jul 10 2014 12:44:30
  */
-export default function subSeconds (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addSeconds(dirtyDate, -amount, dirtyOptions)
+function subSeconds(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount, dirtyOptions);
 }
+module.exports = exports['default'];

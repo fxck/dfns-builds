@@ -1,6 +1,12 @@
-var MILLISECONDS_IN_HOUR = 3600000
-var MILLISECONDS_IN_MINUTE = 60000
-var DEFAULT_ADDITIONAL_DIGITS = 2
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = toDate;
+var MILLISECONDS_IN_HOUR = 3600000;
+var MILLISECONDS_IN_MINUTE = 60000;
+var DEFAULT_ADDITIONAL_DIGITS = 2;
 
 var patterns = {
   dateTimeDelimeter: /[T ]/,
@@ -8,16 +14,14 @@ var patterns = {
 
   // year tokens
   YY: /^(\d{2})$/,
-  YYY: [
-    /^([+-]\d{2})$/, // 0 additional digits
-    /^([+-]\d{3})$/, // 1 additional digit
-    /^([+-]\d{4})$/ // 2 additional digits
+  YYY: [/^([+-]\d{2})$/, // 0 additional digits
+  /^([+-]\d{3})$/, // 1 additional digit
+  /^([+-]\d{4})$/ // 2 additional digits
   ],
   YYYY: /^(\d{4})/,
-  YYYYY: [
-    /^([+-]\d{4})/, // 0 additional digits
-    /^([+-]\d{5})/, // 1 additional digit
-    /^([+-]\d{6})/ // 2 additional digits
+  YYYYY: [/^([+-]\d{4})/, // 0 additional digits
+  /^([+-]\d{5})/, // 1 additional digit
+  /^([+-]\d{6})/ // 2 additional digits
   ],
 
   // date tokens
@@ -36,7 +40,7 @@ var patterns = {
   timezoneZ: /^(Z)$/,
   timezoneHH: /^([+-])(\d{2})$/,
   timezoneHHMM: /^([+-])(\d{2}):?(\d{2})$/
-}
+};
 
 /**
  * @name toDate
@@ -76,246 +80,244 @@ var patterns = {
  * var result = toDate('+02014101', {additionalDigits: 1})
  * //=> Fri Apr 11 2014 00:00:00
  */
-export default function toDate (argument, dirtyOptions) {
-  var options = dirtyOptions || {}
+function toDate(argument, dirtyOptions) {
+  var options = dirtyOptions || {};
 
-  var additionalDigits = options.additionalDigits === undefined ? DEFAULT_ADDITIONAL_DIGITS : Number(options.additionalDigits)
+  var additionalDigits = options.additionalDigits === undefined ? DEFAULT_ADDITIONAL_DIGITS : Number(options.additionalDigits);
   if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) {
-    throw new RangeError('additionalDigits must be 0, 1 or 2')
+    throw new RangeError('additionalDigits must be 0, 1 or 2');
   }
 
   // Clone the date
   if (argument instanceof Date) {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
-    return new Date(argument.getTime())
+    return new Date(argument.getTime());
   } else if (typeof argument !== 'string') {
-    return new Date(argument)
+    return new Date(argument);
   }
 
-  var dateStrings = splitDateString(argument)
+  var dateStrings = splitDateString(argument);
 
-  var parseYearResult = parseYear(dateStrings.date, additionalDigits)
-  var year = parseYearResult.year
-  var restDateString = parseYearResult.restDateString
+  var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+  var year = parseYearResult.year;
+  var restDateString = parseYearResult.restDateString;
 
-  var date = parseDate(restDateString, year)
+  var date = parseDate(restDateString, year);
 
   if (date) {
-    var timestamp = date.getTime()
-    var time = 0
-    var offset
+    var timestamp = date.getTime();
+    var time = 0;
+    var offset;
 
     if (dateStrings.time) {
-      time = parseTime(dateStrings.time)
+      time = parseTime(dateStrings.time);
     }
 
     if (dateStrings.timezone) {
-      offset = parseTimezone(dateStrings.timezone)
+      offset = parseTimezone(dateStrings.timezone);
     } else {
       // get offset accurate to hour in timezones that change offset
-      offset = new Date(timestamp + time).getTimezoneOffset()
-      offset = new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset()
+      offset = new Date(timestamp + time).getTimezoneOffset();
+      offset = new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset();
     }
 
-    return new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE)
+    return new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE);
   } else {
-    return new Date(argument)
+    return new Date(argument);
   }
 }
 
-function splitDateString (dateString) {
-  var dateStrings = {}
-  var array = dateString.split(patterns.dateTimeDelimeter)
-  var timeString
+function splitDateString(dateString) {
+  var dateStrings = {};
+  var array = dateString.split(patterns.dateTimeDelimeter);
+  var timeString;
 
   if (patterns.plainTime.test(array[0])) {
-    dateStrings.date = null
-    timeString = array[0]
+    dateStrings.date = null;
+    timeString = array[0];
   } else {
-    dateStrings.date = array[0]
-    timeString = array[1]
+    dateStrings.date = array[0];
+    timeString = array[1];
   }
 
   if (timeString) {
-    var token = patterns.timezone.exec(timeString)
+    var token = patterns.timezone.exec(timeString);
     if (token) {
-      dateStrings.time = timeString.replace(token[1], '')
-      dateStrings.timezone = token[1]
+      dateStrings.time = timeString.replace(token[1], '');
+      dateStrings.timezone = token[1];
     } else {
-      dateStrings.time = timeString
+      dateStrings.time = timeString;
     }
   }
 
-  return dateStrings
+  return dateStrings;
 }
 
-function parseYear (dateString, additionalDigits) {
-  var patternYYY = patterns.YYY[additionalDigits]
-  var patternYYYYY = patterns.YYYYY[additionalDigits]
+function parseYear(dateString, additionalDigits) {
+  var patternYYY = patterns.YYY[additionalDigits];
+  var patternYYYYY = patterns.YYYYY[additionalDigits];
 
-  var token
+  var token;
 
   // YYYY or ±YYYYY
-  token = patterns.YYYY.exec(dateString) || patternYYYYY.exec(dateString)
+  token = patterns.YYYY.exec(dateString) || patternYYYYY.exec(dateString);
   if (token) {
-    var yearString = token[1]
+    var yearString = token[1];
     return {
       year: parseInt(yearString, 10),
       restDateString: dateString.slice(yearString.length)
-    }
+    };
   }
 
   // YY or ±YYY
-  token = patterns.YY.exec(dateString) || patternYYY.exec(dateString)
+  token = patterns.YY.exec(dateString) || patternYYY.exec(dateString);
   if (token) {
-    var centuryString = token[1]
+    var centuryString = token[1];
     return {
       year: parseInt(centuryString, 10) * 100,
       restDateString: dateString.slice(centuryString.length)
-    }
+    };
   }
 
   // Invalid ISO-formatted year
   return {
     year: null
-  }
+  };
 }
 
-function parseDate (dateString, year) {
+function parseDate(dateString, year) {
   // Invalid ISO-formatted year
   if (year === null) {
-    return null
+    return null;
   }
 
-  var token
-  var date
-  var month
-  var week
+  var token;
+  var date;
+  var month;
+  var week;
 
   // YYYY
   if (dateString.length === 0) {
-    date = new Date(0)
-    date.setUTCFullYear(year)
-    return date
+    date = new Date(0);
+    date.setUTCFullYear(year);
+    return date;
   }
 
   // YYYY-MM
-  token = patterns.MM.exec(dateString)
+  token = patterns.MM.exec(dateString);
   if (token) {
-    date = new Date(0)
-    month = parseInt(token[1], 10) - 1
-    date.setUTCFullYear(year, month)
-    return date
+    date = new Date(0);
+    month = parseInt(token[1], 10) - 1;
+    date.setUTCFullYear(year, month);
+    return date;
   }
 
   // YYYY-DDD or YYYYDDD
-  token = patterns.DDD.exec(dateString)
+  token = patterns.DDD.exec(dateString);
   if (token) {
-    date = new Date(0)
-    var dayOfYear = parseInt(token[1], 10)
-    date.setUTCFullYear(year, 0, dayOfYear)
-    return date
+    date = new Date(0);
+    var dayOfYear = parseInt(token[1], 10);
+    date.setUTCFullYear(year, 0, dayOfYear);
+    return date;
   }
 
   // YYYY-MM-DD or YYYYMMDD
-  token = patterns.MMDD.exec(dateString)
+  token = patterns.MMDD.exec(dateString);
   if (token) {
-    date = new Date(0)
-    month = parseInt(token[1], 10) - 1
-    var day = parseInt(token[2], 10)
-    date.setUTCFullYear(year, month, day)
-    return date
+    date = new Date(0);
+    month = parseInt(token[1], 10) - 1;
+    var day = parseInt(token[2], 10);
+    date.setUTCFullYear(year, month, day);
+    return date;
   }
 
   // YYYY-Www or YYYYWww
-  token = patterns.Www.exec(dateString)
+  token = patterns.Www.exec(dateString);
   if (token) {
-    week = parseInt(token[1], 10) - 1
-    return dayOfISOYear(year, week)
+    week = parseInt(token[1], 10) - 1;
+    return dayOfISOYear(year, week);
   }
 
   // YYYY-Www-D or YYYYWwwD
-  token = patterns.WwwD.exec(dateString)
+  token = patterns.WwwD.exec(dateString);
   if (token) {
-    week = parseInt(token[1], 10) - 1
-    var dayOfWeek = parseInt(token[2], 10) - 1
-    return dayOfISOYear(year, week, dayOfWeek)
+    week = parseInt(token[1], 10) - 1;
+    var dayOfWeek = parseInt(token[2], 10) - 1;
+    return dayOfISOYear(year, week, dayOfWeek);
   }
 
   // Invalid ISO-formatted date
-  return null
+  return null;
 }
 
-function parseTime (timeString) {
-  var token
-  var hours
-  var minutes
+function parseTime(timeString) {
+  var token;
+  var hours;
+  var minutes;
 
   // hh
-  token = patterns.HH.exec(timeString)
+  token = patterns.HH.exec(timeString);
   if (token) {
-    hours = parseFloat(token[1].replace(',', '.'))
-    return (hours % 24) * MILLISECONDS_IN_HOUR
+    hours = parseFloat(token[1].replace(',', '.'));
+    return hours % 24 * MILLISECONDS_IN_HOUR;
   }
 
   // hh:mm or hhmm
-  token = patterns.HHMM.exec(timeString)
+  token = patterns.HHMM.exec(timeString);
   if (token) {
-    hours = parseInt(token[1], 10)
-    minutes = parseFloat(token[2].replace(',', '.'))
-    return (hours % 24) * MILLISECONDS_IN_HOUR +
-      minutes * MILLISECONDS_IN_MINUTE
+    hours = parseInt(token[1], 10);
+    minutes = parseFloat(token[2].replace(',', '.'));
+    return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE;
   }
 
   // hh:mm:ss or hhmmss
-  token = patterns.HHMMSS.exec(timeString)
+  token = patterns.HHMMSS.exec(timeString);
   if (token) {
-    hours = parseInt(token[1], 10)
-    minutes = parseInt(token[2], 10)
-    var seconds = parseFloat(token[3].replace(',', '.'))
-    return (hours % 24) * MILLISECONDS_IN_HOUR +
-      minutes * MILLISECONDS_IN_MINUTE +
-      seconds * 1000
+    hours = parseInt(token[1], 10);
+    minutes = parseInt(token[2], 10);
+    var seconds = parseFloat(token[3].replace(',', '.'));
+    return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE + seconds * 1000;
   }
 
   // Invalid ISO-formatted time
-  return null
+  return null;
 }
 
-function parseTimezone (timezoneString) {
-  var token
-  var absoluteOffset
+function parseTimezone(timezoneString) {
+  var token;
+  var absoluteOffset;
 
   // Z
-  token = patterns.timezoneZ.exec(timezoneString)
+  token = patterns.timezoneZ.exec(timezoneString);
   if (token) {
-    return 0
+    return 0;
   }
 
   // ±hh
-  token = patterns.timezoneHH.exec(timezoneString)
+  token = patterns.timezoneHH.exec(timezoneString);
   if (token) {
-    absoluteOffset = parseInt(token[2], 10) * 60
-    return (token[1] === '+') ? -absoluteOffset : absoluteOffset
+    absoluteOffset = parseInt(token[2], 10) * 60;
+    return token[1] === '+' ? -absoluteOffset : absoluteOffset;
   }
 
   // ±hh:mm or ±hhmm
-  token = patterns.timezoneHHMM.exec(timezoneString)
+  token = patterns.timezoneHHMM.exec(timezoneString);
   if (token) {
-    absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10)
-    return (token[1] === '+') ? -absoluteOffset : absoluteOffset
+    absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10);
+    return token[1] === '+' ? -absoluteOffset : absoluteOffset;
   }
 
-  return 0
+  return 0;
 }
 
-function dayOfISOYear (isoYear, week, day) {
-  week = week || 0
-  day = day || 0
-  var date = new Date(0)
-  date.setUTCFullYear(isoYear, 0, 4)
-  var fourthOfJanuaryDay = date.getUTCDay() || 7
-  var diff = week * 7 + day + 1 - fourthOfJanuaryDay
-  date.setUTCDate(date.getUTCDate() + diff)
-  return date
+function dayOfISOYear(isoYear, week, day) {
+  week = week || 0;
+  day = day || 0;
+  var date = new Date(0);
+  date.setUTCFullYear(isoYear, 0, 4);
+  var fourthOfJanuaryDay = date.getUTCDay() || 7;
+  var diff = week * 7 + day + 1 - fourthOfJanuaryDay;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date;
 }
+module.exports = exports['default'];

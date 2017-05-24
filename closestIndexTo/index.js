@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = closestIndexTo;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name closestIndexTo
@@ -26,33 +37,34 @@ import toDate from '../toDate/index.js'
  * var result = closestIndexTo(dateToCompare, datesArray)
  * //=> 1
  */
-export default function closestIndexTo (dirtyDateToCompare, dirtyDatesArray, dirtyOptions) {
-  var dateToCompare = toDate(dirtyDateToCompare, dirtyOptions)
+function closestIndexTo(dirtyDateToCompare, dirtyDatesArray, dirtyOptions) {
+  var dateToCompare = (0, _index2.default)(dirtyDateToCompare, dirtyOptions);
 
   if (isNaN(dateToCompare)) {
-    return NaN
+    return NaN;
   }
 
-  var timeToCompare = dateToCompare.getTime()
+  var timeToCompare = dateToCompare.getTime();
 
-  var result
-  var minDistance
+  var result;
+  var minDistance;
 
   dirtyDatesArray.forEach(function (dirtyDate, index) {
-    var currentDate = toDate(dirtyDate, dirtyOptions)
+    var currentDate = (0, _index2.default)(dirtyDate, dirtyOptions);
 
     if (isNaN(currentDate)) {
-      result = NaN
-      minDistance = NaN
-      return
+      result = NaN;
+      minDistance = NaN;
+      return;
     }
 
-    var distance = Math.abs(timeToCompare - currentDate.getTime())
+    var distance = Math.abs(timeToCompare - currentDate.getTime());
     if (result === undefined || distance < minDistance) {
-      result = index
-      minDistance = distance
+      result = index;
+      minDistance = distance;
     }
-  })
+  });
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

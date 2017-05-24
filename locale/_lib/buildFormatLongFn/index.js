@@ -1,9 +1,15 @@
-var tokensToBeShortedPattern = /MMMM|MM|DD|dddd/g
+"use strict";
 
-function buildShortLongFormat (format) {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildFormatLongFn;
+var tokensToBeShortedPattern = /MMMM|MM|DD|dddd/g;
+
+function buildShortLongFormat(format) {
   return format.replace(tokensToBeShortedPattern, function (token) {
-    return token.slice(1)
-  })
+    return token.slice(1);
+  });
 }
 
 /**
@@ -46,7 +52,7 @@ function buildShortLongFormat (format) {
  *   LLLL: 'dddd, MMMM D YYYY h:mm aa'
  * })
  */
-export default function buildFormatLongFn (obj) {
+function buildFormatLongFn(obj) {
   var formatLongLocale = {
     LTS: obj.LTS,
     LT: obj.LT,
@@ -58,9 +64,10 @@ export default function buildFormatLongFn (obj) {
     ll: obj.ll || buildShortLongFormat(obj.LL),
     lll: obj.lll || buildShortLongFormat(obj.LLL),
     llll: obj.llll || buildShortLongFormat(obj.LLLL)
-  }
+  };
 
   return function (token) {
-    return formatLongLocale[token]
-  }
+    return formatLongLocale[token];
+  };
 }
+module.exports = exports["default"];

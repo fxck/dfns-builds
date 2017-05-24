@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import endOfDay from '../endOfDay/index.js'
-import endOfMonth from '../endOfMonth/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isLastDayOfMonth;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../endOfDay/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../endOfMonth/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isLastDayOfMonth
@@ -21,7 +38,8 @@ import endOfMonth from '../endOfMonth/index.js'
  * var result = isLastDayOfMonth(new Date(2014, 1, 28))
  * //=> true
  */
-export default function isLastDayOfMonth (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  return endOfDay(date, dirtyOptions).getTime() === endOfMonth(date, dirtyOptions).getTime()
+function isLastDayOfMonth(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  return (0, _index4.default)(date, dirtyOptions).getTime() === (0, _index6.default)(date, dirtyOptions).getTime();
 }
+module.exports = exports['default'];

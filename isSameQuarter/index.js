@@ -1,4 +1,15 @@
-import startOfQuarter from '../startOfQuarter/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameQuarter;
+
+var _index = require('../startOfQuarter/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameQuarter
@@ -23,9 +34,10 @@ import startOfQuarter from '../startOfQuarter/index.js'
  * )
  * //=> true
  */
-export default function isSameQuarter (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeftStartOfQuarter = startOfQuarter(dirtyDateLeft, dirtyOptions)
-  var dateRightStartOfQuarter = startOfQuarter(dirtyDateRight, dirtyOptions)
+function isSameQuarter(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeftStartOfQuarter = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRightStartOfQuarter = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  return dateLeftStartOfQuarter.getTime() === dateRightStartOfQuarter.getTime()
+  return dateLeftStartOfQuarter.getTime() === dateRightStartOfQuarter.getTime();
 }
+module.exports = exports['default'];

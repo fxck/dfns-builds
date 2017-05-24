@@ -1,4 +1,15 @@
-import addMilliseconds from '../addMilliseconds/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addSeconds;
+
+var _index = require('../addMilliseconds/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addSeconds
@@ -20,7 +31,8 @@ import addMilliseconds from '../addMilliseconds/index.js'
  * var result = addSeconds(new Date(2014, 6, 10, 12, 45, 0), 30)
  * //=> Thu Jul 10 2014 12:45:30
  */
-export default function addSeconds (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addMilliseconds(dirtyDate, amount * 1000, dirtyOptions)
+function addSeconds(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, amount * 1000, dirtyOptions);
 }
+module.exports = exports['default'];

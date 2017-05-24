@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     one: 'น้อยกว่า 1 วินาที',
@@ -65,31 +71,32 @@ var formatDistanceLocale = {
     one: 'เกือบ 1 ปี',
     other: 'เกือบ {{count}} ปี'
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var result
+  var result;
   if (typeof formatDistanceLocale[token] === 'string') {
-    result = formatDistanceLocale[token]
+    result = formatDistanceLocale[token];
   } else if (count === 1) {
-    result = formatDistanceLocale[token].one
+    result = formatDistanceLocale[token].one;
   } else {
-    result = formatDistanceLocale[token].other.replace('{{count}}', count)
+    result = formatDistanceLocale[token].other.replace('{{count}}', count);
   }
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
       if (token === 'halfAMinute') {
-        return 'ใน' + result
+        return 'ใน' + result;
       } else {
-        return 'ใน ' + result
+        return 'ใน ' + result;
       }
     } else {
-      return result + 'ที่ผ่านมา'
+      return result + 'ที่ผ่านมา';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

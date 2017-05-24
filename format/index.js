@@ -1,12 +1,38 @@
-import toDate from '../toDate/index.js'
-import isValid from '../isValid/index.js'
-import defaultLocale from '../locale/en-US/index.js'
-import formatters from './_lib/formatters/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
-import addUTCMinutes from '../_lib/addUTCMinutes/index.js'
+'use strict';
 
-var longFormattingTokensRegExp = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g
-var defaultFormattingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = format;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../isValid/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../locale/en-US/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = require('./_lib/formatters/index.js');
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _index9 = require('../_lib/cloneObject/index.js');
+
+var _index10 = _interopRequireDefault(_index9);
+
+var _index11 = require('../_lib/addUTCMinutes/index.js');
+
+var _index12 = _interopRequireDefault(_index11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var longFormattingTokensRegExp = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g;
+var defaultFormattingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g;
 
 /**
  * @name format
@@ -106,73 +132,72 @@ var defaultFormattingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|d
  * )
  * //=> '2-a de julio 2014'
  */
-export default function format (dirtyDate, dirtyFormatStr, dirtyOptions) {
-  var formatStr = String(dirtyFormatStr)
-  var options = dirtyOptions || {}
+function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
+  var formatStr = String(dirtyFormatStr);
+  var options = dirtyOptions || {};
 
-  var locale = options.locale || defaultLocale
+  var locale = options.locale || _index6.default;
 
   if (!locale.localize) {
-    throw new RangeError('locale must contain localize property')
+    throw new RangeError('locale must contain localize property');
   }
 
   if (!locale.formatLong) {
-    throw new RangeError('locale must contain formatLong property')
+    throw new RangeError('locale must contain formatLong property');
   }
 
-  var localeFormatters = locale.formatters || {}
-  var formattingTokensRegExp = locale.formattingTokensRegExp || defaultFormattingTokensRegExp
-  var formatLong = locale.formatLong
+  var localeFormatters = locale.formatters || {};
+  var formattingTokensRegExp = locale.formattingTokensRegExp || defaultFormattingTokensRegExp;
+  var formatLong = locale.formatLong;
 
-  var originalDate = toDate(dirtyDate, options)
+  var originalDate = (0, _index2.default)(dirtyDate, options);
 
-  if (!isValid(originalDate, options)) {
-    return 'Invalid Date'
+  if (!(0, _index4.default)(originalDate, options)) {
+    return 'Invalid Date';
   }
 
   // Convert the date in system timezone to the same date in UTC+00:00 timezone.
   // This ensures that when UTC functions will be implemented, locales will be compatible with them.
   // See an issue about UTC functions: https://github.com/date-fns/date-fns/issues/376
-  var timezoneOffset = originalDate.getTimezoneOffset()
-  var utcDate = addUTCMinutes(originalDate, -timezoneOffset, options)
+  var timezoneOffset = originalDate.getTimezoneOffset();
+  var utcDate = (0, _index12.default)(originalDate, -timezoneOffset, options);
 
-  var formatterOptions = cloneObject(options)
-  formatterOptions.locale = locale
-  formatterOptions.formatters = formatters
+  var formatterOptions = (0, _index10.default)(options);
+  formatterOptions.locale = locale;
+  formatterOptions.formatters = _index8.default;
 
   // When UTC functions will be implemented, options._originalDate will likely be a part of public API.
   // Right now, please don't use it in locales. If you have to use an original date,
   // please restore it from `date`, adding a timezone offset to it.
-  formatterOptions._originalDate = originalDate
+  formatterOptions._originalDate = originalDate;
 
-  var result = formatStr
-    .replace(longFormattingTokensRegExp, function (substring) {
-      if (substring[0] === '[') {
-        return substring
-      }
+  var result = formatStr.replace(longFormattingTokensRegExp, function (substring) {
+    if (substring[0] === '[') {
+      return substring;
+    }
 
-      if (substring[0] === '\\') {
-        return cleanEscapedString(substring)
-      }
+    if (substring[0] === '\\') {
+      return cleanEscapedString(substring);
+    }
 
-      return formatLong(substring)
-    })
-    .replace(formattingTokensRegExp, function (substring) {
-      var formatter = localeFormatters[substring] || formatters[substring]
+    return formatLong(substring);
+  }).replace(formattingTokensRegExp, function (substring) {
+    var formatter = localeFormatters[substring] || _index8.default[substring];
 
-      if (formatter) {
-        return formatter(utcDate, formatterOptions)
-      } else {
-        return cleanEscapedString(substring)
-      }
-    })
+    if (formatter) {
+      return formatter(utcDate, formatterOptions);
+    } else {
+      return cleanEscapedString(substring);
+    }
+  });
 
-  return result
+  return result;
 }
 
-function cleanEscapedString (input) {
+function cleanEscapedString(input) {
   if (input.match(/\[[\s\S]/)) {
-    return input.replace(/^\[|]$/g, '')
+    return input.replace(/^\[|]$/g, '');
   }
-  return input.replace(/\\/g, '')
+  return input.replace(/\\/g, '');
 }
+module.exports = exports['default'];

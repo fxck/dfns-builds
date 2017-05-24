@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isWithinInterval;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isWithinInterval
@@ -33,15 +44,16 @@ import toDate from '../toDate/index.js'
  * )
  * //=> false
  */
-export default function isWithinInterval (dirtyDate, dirtyInterval, dirtyOptions) {
-  var time = toDate(dirtyDate, dirtyOptions).getTime()
-  var startTime = toDate(dirtyInterval.start, dirtyOptions).getTime()
-  var endTime = toDate(dirtyInterval.end, dirtyOptions).getTime()
+function isWithinInterval(dirtyDate, dirtyInterval, dirtyOptions) {
+  var time = (0, _index2.default)(dirtyDate, dirtyOptions).getTime();
+  var startTime = (0, _index2.default)(dirtyInterval.start, dirtyOptions).getTime();
+  var endTime = (0, _index2.default)(dirtyInterval.end, dirtyOptions).getTime();
 
   // Throw an exception if start date is after end date or if any date is `Invalid Date`
   if (!(startTime <= endTime)) {
-    throw new RangeError('Invalid interval')
+    throw new RangeError('Invalid interval');
   }
 
-  return time >= startTime && time <= endTime
+  return time >= startTime && time <= endTime;
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import addQuarters from '../addQuarters/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = subQuarters;
+
+var _index = require('../addQuarters/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name subQuarters
@@ -20,7 +31,8 @@ import addQuarters from '../addQuarters/index.js'
  * var result = subQuarters(new Date(2014, 8, 1), 3)
  * //=> Sun Dec 01 2013 00:00:00
  */
-export default function subQuarters (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addQuarters(dirtyDate, -amount, dirtyOptions)
+function subQuarters(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount, dirtyOptions);
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isLeapYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isLeapYear
@@ -19,8 +30,9 @@ import toDate from '../toDate/index.js'
  * var result = isLeapYear(new Date(2012, 8, 1))
  * //=> true
  */
-export default function isLeapYear (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var year = date.getFullYear()
-  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0
+function isLeapYear(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var year = date.getFullYear();
+  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
 }
+module.exports = exports['default'];

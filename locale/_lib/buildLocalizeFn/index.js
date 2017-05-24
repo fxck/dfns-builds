@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildLocalizeFn;
 /**
  * @name buildLocalizeFn
  * @category Locale Helpers
@@ -31,12 +37,13 @@
  * locale.localize.timeOfDay(16, {type: 'uppercase'}) //=> 'PM'
  * locale.localize.timeOfDay(5) //=> 'a.m.'
  */
-export default function buildLocalizeFn (values, defaultType, indexCallback) {
+function buildLocalizeFn(values, defaultType, indexCallback) {
   return function (dirtyIndex, dirtyOptions) {
-    var options = dirtyOptions || {}
-    var type = options.type ? String(options.type) : defaultType
-    var valuesArray = values[type] || values[defaultType]
-    var index = indexCallback ? indexCallback(Number(dirtyIndex)) : Number(dirtyIndex)
-    return valuesArray[index]
-  }
+    var options = dirtyOptions || {};
+    var type = options.type ? String(options.type) : defaultType;
+    var valuesArray = values[type] || values[defaultType];
+    var index = indexCallback ? indexCallback(Number(dirtyIndex)) : Number(dirtyIndex);
+    return valuesArray[index];
+  };
 }
+module.exports = exports["default"];

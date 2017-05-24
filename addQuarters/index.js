@@ -1,4 +1,15 @@
-import addMonths from '../addMonths/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addQuarters;
+
+var _index = require('../addMonths/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addQuarters
@@ -20,8 +31,9 @@ import addMonths from '../addMonths/index.js'
  * var result = addQuarters(new Date(2014, 8, 1), 1)
  * //=> Mon Dec 01 2014 00:00:00
  */
-export default function addQuarters (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  var months = amount * 3
-  return addMonths(dirtyDate, months, dirtyOptions)
+function addQuarters(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  var months = amount * 3;
+  return (0, _index2.default)(dirtyDate, months, dirtyOptions);
 }
+module.exports = exports['default'];

@@ -1,60 +1,66 @@
-function declensionGroup (scheme, count) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
+function declensionGroup(scheme, count) {
   if (count === 1) {
-    return scheme.one
+    return scheme.one;
   }
 
   if (count >= 2 && count <= 4) {
-    return scheme.twoFour
+    return scheme.twoFour;
   }
 
   // if count === null || count === 0 || count >= 5
-  return scheme.other
+  return scheme.other;
 }
 
-function declension (scheme, count, time) {
-  var group = declensionGroup(scheme, count)
-  var finalText = group[time] || group
-  return finalText.replace('{{count}}', count)
+function declension(scheme, count, time) {
+  var group = declensionGroup(scheme, count);
+  var finalText = group[time] || group;
+  return finalText.replace('{{count}}', count);
 }
 
-function extractPreposition (token) {
+function extractPreposition(token) {
   var result = ['lessThan', 'about', 'over', 'almost'].filter(function (preposition) {
-    return !!token.match(new RegExp('^' + preposition))
-  })
+    return !!token.match(new RegExp('^' + preposition));
+  });
 
-  return result[0]
+  return result[0];
 }
 
-function prefixPreposition (preposition) {
-  var translation = ''
+function prefixPreposition(preposition) {
+  var translation = '';
 
   if (preposition === 'almost') {
-    translation = 'skoro'
+    translation = 'skoro';
   }
 
   if (preposition === 'about') {
-    translation = 'přibližně'
+    translation = 'přibližně';
   }
 
-  return translation.length > 0 ? translation + ' ' : ''
+  return translation.length > 0 ? translation + ' ' : '';
 }
 
-function suffixPreposition (preposition) {
-  var translation = ''
+function suffixPreposition(preposition) {
+  var translation = '';
 
   if (preposition === 'lessThan') {
-    translation = 'méně než'
+    translation = 'méně než';
   }
 
   if (preposition === 'over') {
-    translation = 'více než'
+    translation = 'více než';
   }
 
-  return translation.length > 0 ? translation + ' ' : ''
+  return translation.length > 0 ? translation + ' ' : '';
 }
 
-function lowercaseFirstLetter (string) {
-  return string.charAt(0).toLowerCase() + string.slice(1)
+function lowercaseFirstLetter(string) {
+  return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
 var formatDistanceLocale = {
@@ -173,22 +179,23 @@ var formatDistanceLocale = {
       future: '{{count}} roků'
     }
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var preposition = extractPreposition(token) || ''
-  var key = lowercaseFirstLetter(token.substring(preposition.length))
-  var scheme = formatDistanceLocale[key]
+  var preposition = extractPreposition(token) || '';
+  var key = lowercaseFirstLetter(token.substring(preposition.length));
+  var scheme = formatDistanceLocale[key];
 
   if (!options.addSuffix) {
-    return prefixPreposition(preposition) + suffixPreposition(preposition) + declension(scheme, count, 'regular')
+    return prefixPreposition(preposition) + suffixPreposition(preposition) + declension(scheme, count, 'regular');
   }
 
   if (options.comparison > 0) {
-    return prefixPreposition(preposition) + 'za ' + suffixPreposition(preposition) + declension(scheme, count, 'future')
+    return prefixPreposition(preposition) + 'za ' + suffixPreposition(preposition) + declension(scheme, count, 'future');
   } else {
-    return prefixPreposition(preposition) + 'před ' + suffixPreposition(preposition) + declension(scheme, count, 'past')
+    return prefixPreposition(preposition) + 'před ' + suffixPreposition(preposition) + declension(scheme, count, 'past');
   }
 }
+module.exports = exports['default'];

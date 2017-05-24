@@ -1,4 +1,15 @@
-import addMinutes from '../addMinutes/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = subMinutes;
+
+var _index = require('../addMinutes/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name subMinutes
@@ -20,7 +31,8 @@ import addMinutes from '../addMinutes/index.js'
  * var result = subMinutes(new Date(2014, 6, 10, 12, 0), 30)
  * //=> Thu Jul 10 2014 11:30:00
  */
-export default function subMinutes (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addMinutes(dirtyDate, -amount, dirtyOptions)
+function subMinutes(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount, dirtyOptions);
 }
+module.exports = exports['default'];

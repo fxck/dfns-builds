@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import startOfISOYear from '../startOfISOYear/index.js'
-import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setISOYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../startOfISOYear/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../differenceInCalendarDays/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setISOYear
@@ -25,14 +42,15 @@ import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
  * var result = setISOYear(new Date(2008, 11, 29), 2007)
  * //=> Mon Jan 01 2007 00:00:00
  */
-export default function setISOYear (dirtyDate, dirtyISOYear, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var isoYear = Number(dirtyISOYear)
-  var diff = differenceInCalendarDays(date, startOfISOYear(date, dirtyOptions), dirtyOptions)
-  var fourthOfJanuary = new Date(0)
-  fourthOfJanuary.setFullYear(isoYear, 0, 4)
-  fourthOfJanuary.setHours(0, 0, 0, 0)
-  date = startOfISOYear(fourthOfJanuary, dirtyOptions)
-  date.setDate(date.getDate() + diff)
-  return date
+function setISOYear(dirtyDate, dirtyISOYear, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var isoYear = Number(dirtyISOYear);
+  var diff = (0, _index6.default)(date, (0, _index4.default)(date, dirtyOptions), dirtyOptions);
+  var fourthOfJanuary = new Date(0);
+  fourthOfJanuary.setFullYear(isoYear, 0, 4);
+  fourthOfJanuary.setHours(0, 0, 0, 0);
+  date = (0, _index4.default)(fourthOfJanuary, dirtyOptions);
+  date.setDate(date.getDate() + diff);
+  return date;
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = eachDayOfInterval;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name eachDayOfInterval
@@ -30,26 +41,27 @@ import toDate from '../toDate/index.js'
  * //   Fri Oct 10 2014 00:00:00
  * // ]
  */
-export default function eachDayOfInterval (dirtyInterval, dirtyOptions) {
-  var startDate = toDate(dirtyInterval.start, dirtyOptions)
-  var endDate = toDate(dirtyInterval.end, dirtyOptions)
+function eachDayOfInterval(dirtyInterval, dirtyOptions) {
+  var startDate = (0, _index2.default)(dirtyInterval.start, dirtyOptions);
+  var endDate = (0, _index2.default)(dirtyInterval.end, dirtyOptions);
 
-  var endTime = endDate.getTime()
+  var endTime = endDate.getTime();
 
   // Throw an exception if start date is after end date or if any date is `Invalid Date`
   if (!(startDate.getTime() <= endTime)) {
-    throw new RangeError('Invalid interval')
+    throw new RangeError('Invalid interval');
   }
 
-  var dates = []
+  var dates = [];
 
-  var currentDate = startDate
-  currentDate.setHours(0, 0, 0, 0)
+  var currentDate = startDate;
+  currentDate.setHours(0, 0, 0, 0);
 
   while (currentDate.getTime() <= endTime) {
-    dates.push(toDate(currentDate, dirtyOptions))
-    currentDate.setDate(currentDate.getDate() + 1)
+    dates.push((0, _index2.default)(currentDate, dirtyOptions));
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 
-  return dates
+  return dates;
 }
+module.exports = exports['default'];

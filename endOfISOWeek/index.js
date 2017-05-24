@@ -1,5 +1,19 @@
-import endOfWeek from '../endOfWeek/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = endOfISOWeek;
+
+var _index = require('../endOfWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/cloneObject/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name endOfISOWeek
@@ -23,8 +37,9 @@ import cloneObject from '../_lib/cloneObject/index.js'
  * var result = endOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
  * //=> Sun Sep 07 2014 23:59:59.999
  */
-export default function endOfISOWeek (dirtyDate, dirtyOptions) {
-  var endOfWeekOptions = cloneObject(dirtyOptions)
-  endOfWeekOptions.weekStartsOn = 1
-  return endOfWeek(dirtyDate, endOfWeekOptions)
+function endOfISOWeek(dirtyDate, dirtyOptions) {
+  var endOfWeekOptions = (0, _index4.default)(dirtyOptions);
+  endOfWeekOptions.weekStartsOn = 1;
+  return (0, _index2.default)(dirtyDate, endOfWeekOptions);
 }
+module.exports = exports['default'];

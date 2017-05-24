@@ -1,4 +1,15 @@
-import addISOYears from '../addISOYears/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = subISOYears;
+
+var _index = require('../addISOYears/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name subISOYears
@@ -22,7 +33,8 @@ import addISOYears from '../addISOYears/index.js'
  * var result = subISOYears(new Date(2014, 8, 1), 5)
  * //=> Mon Aug 31 2009 00:00:00
  */
-export default function subISOYears (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addISOYears(dirtyDate, -amount, dirtyOptions)
+function subISOYears(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount, dirtyOptions);
 }
+module.exports = exports['default'];

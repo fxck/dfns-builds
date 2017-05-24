@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getQuarter;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getQuarter
@@ -19,8 +30,9 @@ import toDate from '../toDate/index.js'
  * var result = getQuarter(new Date(2014, 6, 2))
  * //=> 3
  */
-export default function getQuarter (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var quarter = Math.floor(date.getMonth() / 3) + 1
-  return quarter
+function getQuarter(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var quarter = Math.floor(date.getMonth() / 3) + 1;
+  return quarter;
 }
+module.exports = exports['default'];

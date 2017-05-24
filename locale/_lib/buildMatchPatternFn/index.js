@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildMatchPatternFn;
 /**
  * @name buildMatchPatternFn
  * @category Locale Helpers
@@ -14,9 +20,10 @@
  * locale.match.ordinalNumbers = buildMatchPatternFn(/^(\d+)(th|st|nd|rd)?/i)
  * locale.match.ordinalNumbers('3rd') //=> ['3rd', '3', 'rd', ...]
  */
-export default function buildMatchPatternFn (pattern) {
+function buildMatchPatternFn(pattern) {
   return function (dirtyString) {
-    var string = String(dirtyString)
-    return string.match(pattern)
-  }
+    var string = String(dirtyString);
+    return string.match(pattern);
+  };
 }
+module.exports = exports["default"];

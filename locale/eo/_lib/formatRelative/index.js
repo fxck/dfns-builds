@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatRelative;
 var formatRelativeLocale = {
   lastWeek: '[pasinta] dddd [je] LT',
   yesterday: '[hieraŭ je] LT',
@@ -5,8 +11,9 @@ var formatRelativeLocale = {
   tomorrow: '[morgaŭ je] LT',
   nextWeek: 'dddd [je] LT',
   other: 'L'
-}
+};
 
-export default function formatRelative (token, date, baseDate, options) {
-  return formatRelativeLocale[token]
+function formatRelative(token, date, baseDate, options) {
+  return formatRelativeLocale[token];
 }
+module.exports = exports['default'];

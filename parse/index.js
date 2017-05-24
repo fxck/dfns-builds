@@ -1,15 +1,41 @@
-import toDate from '../toDate/index.js'
-import subMinutes from '../subMinutes/index.js'
-import defaultLocale from '../locale/en-US/index.js'
-import parsers from './_lib/parsers/index.js'
-import units from './_lib/units/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
+'use strict';
 
-var TIMEZONE_UNIT_PRIORITY = 110
-var MILLISECONDS_IN_MINUTE = 60000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = parse;
 
-var longFormattingTokensRegExp = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g
-var defaultParsingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../subMinutes/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../locale/en-US/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = require('./_lib/parsers/index.js');
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _index9 = require('./_lib/units/index.js');
+
+var _index10 = _interopRequireDefault(_index9);
+
+var _index11 = require('../_lib/cloneObject/index.js');
+
+var _index12 = _interopRequireDefault(_index11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TIMEZONE_UNIT_PRIORITY = 110;
+var MILLISECONDS_IN_MINUTE = 60000;
+
+var longFormattingTokensRegExp = /(\[[^[]*])|(\\)?(LTS|LT|LLLL|LLL|LL|L|llll|lll|ll|l)/g;
+var defaultParsingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|dd|d|aa|a|ZZ|Z|YYYY|YY|X|Wo|WW|W|SSS|SS|S|Qo|Q|Mo|MMMM|MMM|MM|M|HH|H|GGGG|GG|E|Do|DDDo|DDDD|DDD|DD|D|A|.)/g;
 
 /**
  * @name parse
@@ -137,164 +163,157 @@ var defaultParsingTokensRegExp = /(\[[^[]*])|(\\)?(x|ss|s|mm|m|hh|h|do|dddd|ddd|
  * )
  * //=> Sun Feb 28 2010 00:00:00
  */
-export default function parse (dirtyDateString, dirtyFormatString, dirtyBaseDate, dirtyOptions) {
-  var dateString = String(dirtyDateString)
-  var options = dirtyOptions || {}
+function parse(dirtyDateString, dirtyFormatString, dirtyBaseDate, dirtyOptions) {
+  var dateString = String(dirtyDateString);
+  var options = dirtyOptions || {};
 
-  var weekStartsOn = options.weekStartsOn === undefined ? 0 : Number(options.weekStartsOn)
+  var weekStartsOn = options.weekStartsOn === undefined ? 0 : Number(options.weekStartsOn);
 
   // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively')
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
 
-  var locale = options.locale || defaultLocale
-  var localeParsers = locale.parsers || {}
-  var localeUnits = locale.units || {}
+  var locale = options.locale || _index6.default;
+  var localeParsers = locale.parsers || {};
+  var localeUnits = locale.units || {};
 
   if (!locale.match) {
-    throw new RangeError('locale must contain match property')
+    throw new RangeError('locale must contain match property');
   }
 
   if (!locale.formatLong) {
-    throw new RangeError('locale must contain formatLong property')
+    throw new RangeError('locale must contain formatLong property');
   }
 
-  var formatString = String(dirtyFormatString)
-    .replace(longFormattingTokensRegExp, function (substring) {
-      if (substring[0] === '[') {
-        return substring
-      }
+  var formatString = String(dirtyFormatString).replace(longFormattingTokensRegExp, function (substring) {
+    if (substring[0] === '[') {
+      return substring;
+    }
 
-      if (substring[0] === '\\') {
-        return cleanEscapedString(substring)
-      }
+    if (substring[0] === '\\') {
+      return cleanEscapedString(substring);
+    }
 
-      return locale.formatLong(substring)
-    })
+    return locale.formatLong(substring);
+  });
 
   if (formatString === '') {
     if (dateString === '') {
-      return toDate(dirtyBaseDate, options)
+      return (0, _index2.default)(dirtyBaseDate, options);
     } else {
-      return new Date(NaN)
+      return new Date(NaN);
     }
   }
 
-  var subFnOptions = cloneObject(options)
-  subFnOptions.locale = locale
+  var subFnOptions = (0, _index12.default)(options);
+  subFnOptions.locale = locale;
 
-  var tokens = formatString.match(locale.parsingTokensRegExp || defaultParsingTokensRegExp)
-  var tokensLength = tokens.length
+  var tokens = formatString.match(locale.parsingTokensRegExp || defaultParsingTokensRegExp);
+  var tokensLength = tokens.length;
 
   // If timezone isn't specified, it will be set to the system timezone
   var setters = [{
     priority: TIMEZONE_UNIT_PRIORITY,
     set: dateToSystemTimezone,
     index: 0
-  }]
+  }];
 
-  var i
+  var i;
   for (i = 0; i < tokensLength; i++) {
-    var token = tokens[i]
-    var parser = localeParsers[token] || parsers[token]
+    var token = tokens[i];
+    var parser = localeParsers[token] || _index8.default[token];
     if (parser) {
-      var matchResult
+      var matchResult;
 
       if (parser.match instanceof RegExp) {
-        matchResult = parser.match.exec(dateString)
+        matchResult = parser.match.exec(dateString);
       } else {
-        matchResult = parser.match(dateString, subFnOptions)
+        matchResult = parser.match(dateString, subFnOptions);
       }
 
       if (!matchResult) {
-        return new Date(NaN)
+        return new Date(NaN);
       }
 
-      var unitName = parser.unit
-      var unit = localeUnits[unitName] || units[unitName]
+      var unitName = parser.unit;
+      var unit = localeUnits[unitName] || _index10.default[unitName];
 
       setters.push({
         priority: unit.priority,
         set: unit.set,
         value: parser.parse(matchResult, subFnOptions),
         index: setters.length
-      })
+      });
 
-      var substring = matchResult[0]
-      dateString = dateString.slice(substring.length)
+      var substring = matchResult[0];
+      dateString = dateString.slice(substring.length);
     } else {
-      var head = tokens[i].match(/^\[.*]$/) ? tokens[i].replace(/^\[|]$/g, '') : tokens[i]
+      var head = tokens[i].match(/^\[.*]$/) ? tokens[i].replace(/^\[|]$/g, '') : tokens[i];
       if (dateString.indexOf(head) === 0) {
-        dateString = dateString.slice(head.length)
+        dateString = dateString.slice(head.length);
       } else {
-        return new Date(NaN)
+        return new Date(NaN);
       }
     }
   }
 
-  var uniquePrioritySetters = setters
-    .map(function (setter) {
-      return setter.priority
-    })
-    .sort(function (a, b) {
-      return a - b
-    })
-    .filter(function (priority, index, array) {
-      return array.indexOf(priority) === index
-    })
-    .map(function (priority) {
-      return setters
-        .filter(function (setter) {
-          return setter.priority === priority
-        })
-        .reverse()
-    })
-    .map(function (setterArray) {
-      return setterArray[0]
-    })
+  var uniquePrioritySetters = setters.map(function (setter) {
+    return setter.priority;
+  }).sort(function (a, b) {
+    return a - b;
+  }).filter(function (priority, index, array) {
+    return array.indexOf(priority) === index;
+  }).map(function (priority) {
+    return setters.filter(function (setter) {
+      return setter.priority === priority;
+    }).reverse();
+  }).map(function (setterArray) {
+    return setterArray[0];
+  });
 
-  var date = toDate(dirtyBaseDate, options)
+  var date = (0, _index2.default)(dirtyBaseDate, options);
 
   if (isNaN(date)) {
-    return new Date(NaN)
+    return new Date(NaN);
   }
 
   // Convert the date in system timezone to the same date in UTC+00:00 timezone.
   // This ensures that when UTC functions will be implemented, locales will be compatible with them.
   // See an issue about UTC functions: https://github.com/date-fns/date-fns/issues/37
-  var utcDate = subMinutes(date, date.getTimezoneOffset())
+  var utcDate = (0, _index4.default)(date, date.getTimezoneOffset());
 
-  var dateValues = {date: utcDate}
+  var dateValues = { date: utcDate };
 
-  var settersLength = uniquePrioritySetters.length
+  var settersLength = uniquePrioritySetters.length;
   for (i = 0; i < settersLength; i++) {
-    var setter = uniquePrioritySetters[i]
-    dateValues = setter.set(dateValues, setter.value, subFnOptions)
+    var setter = uniquePrioritySetters[i];
+    dateValues = setter.set(dateValues, setter.value, subFnOptions);
   }
 
-  return dateValues.date
+  return dateValues.date;
 }
 
-function dateToSystemTimezone (dateValues) {
-  var date = dateValues.date
-  var time = date.getTime()
+function dateToSystemTimezone(dateValues) {
+  var date = dateValues.date;
+  var time = date.getTime();
 
   // Get the system timezone offset at (moment of time - offset)
-  var offset = date.getTimezoneOffset()
+  var offset = date.getTimezoneOffset();
 
   // Get the system timezone offset at the exact moment of time
-  offset = new Date(time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset()
+  offset = new Date(time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset();
 
   // Convert date in timezone "UTC+00:00" to the system timezone
-  dateValues.date = new Date(time + offset * MILLISECONDS_IN_MINUTE)
+  dateValues.date = new Date(time + offset * MILLISECONDS_IN_MINUTE);
 
-  return dateValues
+  return dateValues;
 }
 
-function cleanEscapedString (input) {
+function cleanEscapedString(input) {
   if (input.match(/\[[\s\S]/)) {
-    return input.replace(/^\[|]$/g, '')
+    return input.replace(/^\[|]$/g, '');
   }
-  return input.replace(/\\/g, '')
+  return input.replace(/\\/g, '');
 }
+module.exports = exports['default'];

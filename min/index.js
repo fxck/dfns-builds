@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = min;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name min
@@ -26,10 +37,11 @@ import toDate from '../toDate/index.js'
  * )
  * //=> Wed Feb 11 1987 00:00:00
  */
-export default function min (datesArray, dirtyOptions) {
+function min(datesArray, dirtyOptions) {
   var dates = datesArray.map(function (dirtyDate) {
-    return toDate(dirtyDate, dirtyOptions)
-  })
-  var earliestTimestamp = Math.min.apply(null, dates)
-  return new Date(earliestTimestamp)
+    return (0, _index2.default)(dirtyDate, dirtyOptions);
+  });
+  var earliestTimestamp = Math.min.apply(null, dates);
+  return new Date(earliestTimestamp);
 }
+module.exports = exports['default'];

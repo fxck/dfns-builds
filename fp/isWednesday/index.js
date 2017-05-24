@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../isWednesday/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../isWednesday/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var isWednesday = (0, _index4.default)(_index2.default, 1);
 
-var isWednesday = convertToFP(fn, 1)
-
-export default isWednesday
+exports.default = isWednesday;
+module.exports = exports['default'];

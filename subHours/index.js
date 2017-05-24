@@ -1,4 +1,15 @@
-import addHours from '../addHours/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = subHours;
+
+var _index = require('../addHours/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name subHours
@@ -20,7 +31,8 @@ import addHours from '../addHours/index.js'
  * var result = subHours(new Date(2014, 6, 11, 1, 0), 2)
  * //=> Thu Jul 10 2014 23:00:00
  */
-export default function subHours (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addHours(dirtyDate, -amount, dirtyOptions)
+function subHours(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount, dirtyOptions);
 }
+module.exports = exports['default'];

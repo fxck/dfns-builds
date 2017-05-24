@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import startOfYear from '../startOfYear/index.js'
-import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getDayOfYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../startOfYear/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../differenceInCalendarDays/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getDayOfYear
@@ -21,9 +38,10 @@ import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
  * var result = getDayOfYear(new Date(2014, 6, 2))
  * //=> 183
  */
-export default function getDayOfYear (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var diff = differenceInCalendarDays(date, startOfYear(date, dirtyOptions), dirtyOptions)
-  var dayOfYear = diff + 1
-  return dayOfYear
+function getDayOfYear(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var diff = (0, _index6.default)(date, (0, _index4.default)(date, dirtyOptions), dirtyOptions);
+  var dayOfYear = diff + 1;
+  return dayOfYear;
 }
+module.exports = exports['default'];

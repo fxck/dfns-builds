@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = parseDecimal;
 /**
  * @name parseDecimal
  * @category Locale Helpers
@@ -18,6 +24,7 @@
  *   ordinalNumber: parseDecimal
  * }
  */
-export default function parseDecimal (matchResult) {
-  return parseInt(matchResult[1], 10)
+function parseDecimal(matchResult) {
+  return parseInt(matchResult[1], 10);
 }
+module.exports = exports["default"];

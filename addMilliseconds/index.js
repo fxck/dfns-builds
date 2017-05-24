@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addMilliseconds;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addMilliseconds
@@ -20,8 +31,9 @@ import toDate from '../toDate/index.js'
  * var result = addMilliseconds(new Date(2014, 6, 10, 12, 45, 30, 0), 750)
  * //=> Thu Jul 10 2014 12:45:30.750
  */
-export default function addMilliseconds (dirtyDate, dirtyAmount, dirtyOptions) {
-  var timestamp = toDate(dirtyDate, dirtyOptions).getTime()
-  var amount = Number(dirtyAmount)
-  return new Date(timestamp + amount)
+function addMilliseconds(dirtyDate, dirtyAmount, dirtyOptions) {
+  var timestamp = (0, _index2.default)(dirtyDate, dirtyOptions).getTime();
+  var amount = Number(dirtyAmount);
+  return new Date(timestamp + amount);
 }
+module.exports = exports['default'];

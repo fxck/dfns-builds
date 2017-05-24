@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     one: 'kurang dari 1 detik',
@@ -65,27 +71,28 @@ var formatDistanceLocale = {
     one: 'hampir 1 tahun',
     other: 'hampir {{count}} tahun'
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var result
+  var result;
   if (typeof formatDistanceLocale[token] === 'string') {
-    result = formatDistanceLocale[token]
+    result = formatDistanceLocale[token];
   } else if (count === 1) {
-    result = formatDistanceLocale[token].one
+    result = formatDistanceLocale[token].one;
   } else {
-    result = formatDistanceLocale[token].other.replace('{{count}}', count)
+    result = formatDistanceLocale[token].other.replace('{{count}}', count);
   }
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
-      return 'dalam waktu ' + result
+      return 'dalam waktu ' + result;
     } else {
-      return result + ' yang lalu'
+      return result + ' yang lalu';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

@@ -1,7 +1,18 @@
-import startOfISOWeek from '../startOfISOWeek/index.js'
+'use strict';
 
-var MILLISECONDS_IN_MINUTE = 60000
-var MILLISECONDS_IN_WEEK = 604800000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInCalendarISOWeeks;
+
+var _index = require('../startOfISOWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_MINUTE = 60000;
+var MILLISECONDS_IN_WEEK = 604800000;
 
 /**
  * @name differenceInCalendarISOWeeks
@@ -28,17 +39,16 @@ var MILLISECONDS_IN_WEEK = 604800000
  * )
  * //=> 3
  */
-export default function differenceInCalendarISOWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var startOfISOWeekLeft = startOfISOWeek(dirtyDateLeft, dirtyOptions)
-  var startOfISOWeekRight = startOfISOWeek(dirtyDateRight, dirtyOptions)
+function differenceInCalendarISOWeeks(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var startOfISOWeekLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var startOfISOWeekRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var timestampLeft = startOfISOWeekLeft.getTime() -
-    startOfISOWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-  var timestampRight = startOfISOWeekRight.getTime() -
-    startOfISOWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+  var timestampLeft = startOfISOWeekLeft.getTime() - startOfISOWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
+  var timestampRight = startOfISOWeekRight.getTime() - startOfISOWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK);
 }
+module.exports = exports['default'];

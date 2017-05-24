@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = areIntervalsOverlapping;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name areIntervalsOverlapping
@@ -32,16 +43,17 @@ import toDate from '../toDate/index.js'
  * )
  * //=> false
  */
-export default function areIntervalsOverlapping (dirtyIntervalLeft, dirtyIntervalRight, dirtyOptions) {
-  var leftStartTime = toDate(dirtyIntervalLeft.start, dirtyOptions).getTime()
-  var leftEndTime = toDate(dirtyIntervalLeft.end, dirtyOptions).getTime()
-  var rightStartTime = toDate(dirtyIntervalRight.start, dirtyOptions).getTime()
-  var rightEndTime = toDate(dirtyIntervalRight.end, dirtyOptions).getTime()
+function areIntervalsOverlapping(dirtyIntervalLeft, dirtyIntervalRight, dirtyOptions) {
+  var leftStartTime = (0, _index2.default)(dirtyIntervalLeft.start, dirtyOptions).getTime();
+  var leftEndTime = (0, _index2.default)(dirtyIntervalLeft.end, dirtyOptions).getTime();
+  var rightStartTime = (0, _index2.default)(dirtyIntervalRight.start, dirtyOptions).getTime();
+  var rightEndTime = (0, _index2.default)(dirtyIntervalRight.end, dirtyOptions).getTime();
 
   // Throw an exception if start date is after end date or if any date is `Invalid Date`
   if (!(leftStartTime <= leftEndTime && rightStartTime <= rightEndTime)) {
-    throw new RangeError('Invalid interval')
+    throw new RangeError('Invalid interval');
   }
 
-  return leftStartTime < rightEndTime && rightStartTime < leftEndTime
+  return leftStartTime < rightEndTime && rightStartTime < leftEndTime;
 }
+module.exports = exports['default'];

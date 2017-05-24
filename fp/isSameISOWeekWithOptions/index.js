@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../isSameISOWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../isSameISOWeek/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var isSameISOWeekWithOptions = (0, _index4.default)(_index2.default, 3);
 
-var isSameISOWeekWithOptions = convertToFP(fn, 3)
-
-export default isSameISOWeekWithOptions
+exports.default = isSameISOWeekWithOptions;
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import startOfDay from '../startOfDay/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameDay;
+
+var _index = require('../startOfDay/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameDay
@@ -23,9 +34,10 @@ import startOfDay from '../startOfDay/index.js'
  * )
  * //=> true
  */
-export default function isSameDay (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeftStartOfDay = startOfDay(dirtyDateLeft, dirtyOptions)
-  var dateRightStartOfDay = startOfDay(dirtyDateRight, dirtyOptions)
+function isSameDay(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeftStartOfDay = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRightStartOfDay = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime()
+  return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime();
 }
+module.exports = exports['default'];

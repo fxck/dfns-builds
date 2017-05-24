@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import addDays from '../addDays/index.js'
-import getISODay from '../getISODay/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setISODay;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../addDays/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../getISODay/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setISODay
@@ -24,10 +41,11 @@ import getISODay from '../getISODay/index.js'
  * var result = setISODay(new Date(2014, 8, 1), 7)
  * //=> Sun Sep 07 2014 00:00:00
  */
-export default function setISODay (dirtyDate, dirtyDay, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var day = Number(dirtyDay)
-  var currentDay = getISODay(date, dirtyOptions)
-  var diff = day - currentDay
-  return addDays(date, diff, dirtyOptions)
+function setISODay(dirtyDate, dirtyDay, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var day = Number(dirtyDay);
+  var currentDay = (0, _index6.default)(date, dirtyOptions);
+  var diff = day - currentDay;
+  return (0, _index4.default)(date, diff, dirtyOptions);
 }
+module.exports = exports['default'];

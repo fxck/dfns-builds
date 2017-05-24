@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../subSeconds/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../subSeconds/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var subSecondsWithOptions = (0, _index4.default)(_index2.default, 3);
 
-var subSecondsWithOptions = convertToFP(fn, 3)
-
-export default subSecondsWithOptions
+exports.default = subSecondsWithOptions;
+module.exports = exports['default'];

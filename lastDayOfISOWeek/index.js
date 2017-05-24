@@ -1,5 +1,19 @@
-import lastDayOfWeek from '../lastDayOfWeek/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = lastDayOfISOWeek;
+
+var _index = require('../lastDayOfWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/cloneObject/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name lastDayOfISOWeek
@@ -23,8 +37,9 @@ import cloneObject from '../_lib/cloneObject/index.js'
  * var result = lastDayOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
  * //=> Sun Sep 07 2014 00:00:00
  */
-export default function lastDayOfISOWeek (dirtyDate, dirtyOptions) {
-  var lastDayOfWeekOptions = cloneObject(dirtyOptions)
-  lastDayOfWeekOptions.weekStartsOn = 1
-  return lastDayOfWeek(dirtyDate, lastDayOfWeekOptions)
+function lastDayOfISOWeek(dirtyDate, dirtyOptions) {
+  var lastDayOfWeekOptions = (0, _index4.default)(dirtyOptions);
+  lastDayOfWeekOptions.weekStartsOn = 1;
+  return (0, _index2.default)(dirtyDate, lastDayOfWeekOptions);
 }
+module.exports = exports['default'];

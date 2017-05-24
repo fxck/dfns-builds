@@ -1,5 +1,19 @@
-import isSameWeek from '../isSameWeek/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameISOWeek;
+
+var _index = require('../isSameWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/cloneObject/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameISOWeek
@@ -26,8 +40,9 @@ import cloneObject from '../_lib/cloneObject/index.js'
  * )
  * //=> true
  */
-export default function isSameISOWeek (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var isSameWeekOptions = cloneObject(dirtyOptions)
-  isSameWeekOptions.weekStartsOn = 1
-  return isSameWeek(dirtyDateLeft, dirtyDateRight, isSameWeekOptions)
+function isSameISOWeek(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var isSameWeekOptions = (0, _index4.default)(dirtyOptions);
+  isSameWeekOptions.weekStartsOn = 1;
+  return (0, _index2.default)(dirtyDateLeft, dirtyDateRight, isSameWeekOptions);
 }
+module.exports = exports['default'];

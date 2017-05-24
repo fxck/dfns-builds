@@ -1,4 +1,15 @@
-import differenceInMonths from '../differenceInMonths/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInQuarters;
+
+var _index = require('../differenceInMonths/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInQuarters
@@ -23,7 +34,8 @@ import differenceInMonths from '../differenceInMonths/index.js'
  * )
  * //=> 2
  */
-export default function differenceInQuarters (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var diff = differenceInMonths(dirtyDateLeft, dirtyDateRight, dirtyOptions) / 3
-  return diff > 0 ? Math.floor(diff) : Math.ceil(diff)
+function differenceInQuarters(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var diff = (0, _index2.default)(dirtyDateLeft, dirtyDateRight, dirtyOptions) / 3;
+  return diff > 0 ? Math.floor(diff) : Math.ceil(diff);
 }
+module.exports = exports['default'];

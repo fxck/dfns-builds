@@ -1,6 +1,17 @@
-import toDate from '../toDate/index.js'
+'use strict';
 
-var MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getOverlappingDaysInIntervals;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
 /**
  * @name getOverlappingDaysInIntervals
@@ -35,32 +46,29 @@ var MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000
  * )
  * //=> 0
  */
-export default function getOverlappingDaysInIntervals (dirtyIntervalLeft, dirtyIntervalRight, dirtyOptions) {
-  var leftStartTime = toDate(dirtyIntervalLeft.start, dirtyOptions).getTime()
-  var leftEndTime = toDate(dirtyIntervalLeft.end, dirtyOptions).getTime()
-  var rightStartTime = toDate(dirtyIntervalRight.start, dirtyOptions).getTime()
-  var rightEndTime = toDate(dirtyIntervalRight.end, dirtyOptions).getTime()
+function getOverlappingDaysInIntervals(dirtyIntervalLeft, dirtyIntervalRight, dirtyOptions) {
+  var leftStartTime = (0, _index2.default)(dirtyIntervalLeft.start, dirtyOptions).getTime();
+  var leftEndTime = (0, _index2.default)(dirtyIntervalLeft.end, dirtyOptions).getTime();
+  var rightStartTime = (0, _index2.default)(dirtyIntervalRight.start, dirtyOptions).getTime();
+  var rightEndTime = (0, _index2.default)(dirtyIntervalRight.end, dirtyOptions).getTime();
 
   // Throw an exception if start date is after end date or if any date is `Invalid Date`
   if (!(leftStartTime <= leftEndTime && rightStartTime <= rightEndTime)) {
-    throw new RangeError('Invalid interval')
+    throw new RangeError('Invalid interval');
   }
 
-  var isOverlapping = leftStartTime < rightEndTime && rightStartTime < leftEndTime
+  var isOverlapping = leftStartTime < rightEndTime && rightStartTime < leftEndTime;
 
   if (!isOverlapping) {
-    return 0
+    return 0;
   }
 
-  var overlapStartDate = rightStartTime < leftStartTime
-    ? leftStartTime
-    : rightStartTime
+  var overlapStartDate = rightStartTime < leftStartTime ? leftStartTime : rightStartTime;
 
-  var overlapEndDate = rightEndTime > leftEndTime
-    ? leftEndTime
-    : rightEndTime
+  var overlapEndDate = rightEndTime > leftEndTime ? leftEndTime : rightEndTime;
 
-  var differenceInMs = overlapEndDate - overlapStartDate
+  var differenceInMs = overlapEndDate - overlapStartDate;
 
-  return Math.ceil(differenceInMs / MILLISECONDS_IN_DAY)
+  return Math.ceil(differenceInMs / MILLISECONDS_IN_DAY);
 }
+module.exports = exports['default'];

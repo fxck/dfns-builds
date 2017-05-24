@@ -1,5 +1,19 @@
-import toDate from '../toDate/index.js'
-import setMonth from '../setMonth/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setQuarter;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../setMonth/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setQuarter
@@ -21,10 +35,11 @@ import setMonth from '../setMonth/index.js'
  * var result = setQuarter(new Date(2014, 6, 2), 2)
  * //=> Wed Apr 02 2014 00:00:00
  */
-export default function setQuarter (dirtyDate, dirtyQuarter, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var quarter = Number(dirtyQuarter)
-  var oldQuarter = Math.floor(date.getMonth() / 3) + 1
-  var diff = quarter - oldQuarter
-  return setMonth(date, date.getMonth() + diff * 3, dirtyOptions)
+function setQuarter(dirtyDate, dirtyQuarter, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var quarter = Number(dirtyQuarter);
+  var oldQuarter = Math.floor(date.getMonth() / 3) + 1;
+  var diff = quarter - oldQuarter;
+  return (0, _index4.default)(date, date.getMonth() + diff * 3, dirtyOptions);
 }
+module.exports = exports['default'];

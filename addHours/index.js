@@ -1,6 +1,17 @@
-import addMilliseconds from '../addMilliseconds/index.js'
+'use strict';
 
-var MILLISECONDS_IN_HOUR = 3600000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addHours;
+
+var _index = require('../addMilliseconds/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_HOUR = 3600000;
 
 /**
  * @name addHours
@@ -22,7 +33,8 @@ var MILLISECONDS_IN_HOUR = 3600000
  * var result = addHours(new Date(2014, 6, 10, 23, 0), 2)
  * //=> Fri Jul 11 2014 01:00:00
  */
-export default function addHours (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  return addMilliseconds(dirtyDate, amount * MILLISECONDS_IN_HOUR, dirtyOptions)
+function addHours(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, amount * MILLISECONDS_IN_HOUR, dirtyOptions);
 }
+module.exports = exports['default'];

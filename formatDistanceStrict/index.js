@@ -1,12 +1,35 @@
-import compareAsc from '../compareAsc/index.js'
-import toDate from '../toDate/index.js'
-import differenceInSeconds from '../differenceInSeconds/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
-import defaultLocale from '../locale/en-US/index.js'
+'use strict';
 
-var MINUTES_IN_DAY = 1440
-var MINUTES_IN_MONTH = 43200
-var MINUTES_IN_YEAR = 525600
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistanceStrict;
+
+var _index = require('../compareAsc/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../toDate/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../differenceInSeconds/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = require('../_lib/cloneObject/index.js');
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _index9 = require('../locale/en-US/index.js');
+
+var _index10 = _interopRequireDefault(_index9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MINUTES_IN_DAY = 1440;
+var MINUTES_IN_MONTH = 43200;
+var MINUTES_IN_YEAR = 525600;
 
 /**
  * @name formatDistanceStrict
@@ -98,98 +121,99 @@ var MINUTES_IN_YEAR = 525600
  * )
  * //=> '1 jaro'
  */
-export default function formatDistanceStrict (dirtyDate, dirtyBaseDate, dirtyOptions) {
-  var options = dirtyOptions || {}
-  var locale = options.locale || defaultLocale
+function formatDistanceStrict(dirtyDate, dirtyBaseDate, dirtyOptions) {
+  var options = dirtyOptions || {};
+  var locale = options.locale || _index10.default;
 
   if (!locale.formatDistance) {
-    throw new RangeError('locale must contain localize.formatDistance property')
+    throw new RangeError('locale must contain localize.formatDistance property');
   }
 
-  var comparison = compareAsc(dirtyDate, dirtyBaseDate, options)
+  var comparison = (0, _index2.default)(dirtyDate, dirtyBaseDate, options);
 
   if (isNaN(comparison)) {
-    return 'Invalid Date'
+    return 'Invalid Date';
   }
 
-  var localizeOptions = cloneObject(options)
-  localizeOptions.addSuffix = Boolean(options.addSuffix)
-  localizeOptions.comparison = comparison
+  var localizeOptions = (0, _index8.default)(options);
+  localizeOptions.addSuffix = Boolean(options.addSuffix);
+  localizeOptions.comparison = comparison;
 
-  var dateLeft
-  var dateRight
+  var dateLeft;
+  var dateRight;
   if (comparison > 0) {
-    dateLeft = toDate(dirtyBaseDate, options)
-    dateRight = toDate(dirtyDate, options)
+    dateLeft = (0, _index4.default)(dirtyBaseDate, options);
+    dateRight = (0, _index4.default)(dirtyDate, options);
   } else {
-    dateLeft = toDate(dirtyDate, options)
-    dateRight = toDate(dirtyBaseDate, options)
+    dateLeft = (0, _index4.default)(dirtyDate, options);
+    dateRight = (0, _index4.default)(dirtyBaseDate, options);
   }
 
-  var roundingMethod = options.roundingMethod === undefined ? 'floor' : String(options.roundingMethod)
-  var roundingMethodFn
+  var roundingMethod = options.roundingMethod === undefined ? 'floor' : String(options.roundingMethod);
+  var roundingMethodFn;
 
   if (roundingMethod === 'floor') {
-    roundingMethodFn = Math.floor
+    roundingMethodFn = Math.floor;
   } else if (roundingMethod === 'ceil') {
-    roundingMethodFn = Math.ceil
+    roundingMethodFn = Math.ceil;
   } else if (roundingMethod === 'round') {
-    roundingMethodFn = Math.round
+    roundingMethodFn = Math.round;
   } else {
-    throw new RangeError("roundingMethod must be 'floor', 'ceil' or 'round'")
+    throw new RangeError("roundingMethod must be 'floor', 'ceil' or 'round'");
   }
 
-  var seconds = differenceInSeconds(dateRight, dateLeft, dirtyOptions)
-  var offset = dateRight.getTimezoneOffset() - dateLeft.getTimezoneOffset()
-  var minutes = roundingMethodFn(seconds / 60) - offset
+  var seconds = (0, _index6.default)(dateRight, dateLeft, dirtyOptions);
+  var offset = dateRight.getTimezoneOffset() - dateLeft.getTimezoneOffset();
+  var minutes = roundingMethodFn(seconds / 60) - offset;
 
-  var unit
+  var unit;
   if (options.unit === undefined) {
     if (minutes < 1) {
-      unit = 's'
+      unit = 's';
     } else if (minutes < 60) {
-      unit = 'm'
+      unit = 'm';
     } else if (minutes < MINUTES_IN_DAY) {
-      unit = 'h'
+      unit = 'h';
     } else if (minutes < MINUTES_IN_MONTH) {
-      unit = 'd'
+      unit = 'd';
     } else if (minutes < MINUTES_IN_YEAR) {
-      unit = 'M'
+      unit = 'M';
     } else {
-      unit = 'Y'
+      unit = 'Y';
     }
   } else {
-    unit = String(options.unit)
+    unit = String(options.unit);
   }
 
   // 0 up to 60 seconds
   if (unit === 's') {
-    return locale.formatDistance('xSeconds', seconds, localizeOptions)
+    return locale.formatDistance('xSeconds', seconds, localizeOptions);
 
-  // 1 up to 60 mins
+    // 1 up to 60 mins
   } else if (unit === 'm') {
-    return locale.formatDistance('xMinutes', minutes, localizeOptions)
+    return locale.formatDistance('xMinutes', minutes, localizeOptions);
 
-  // 1 up to 24 hours
+    // 1 up to 24 hours
   } else if (unit === 'h') {
-    var hours = roundingMethodFn(minutes / 60)
-    return locale.formatDistance('xHours', hours, localizeOptions)
+    var hours = roundingMethodFn(minutes / 60);
+    return locale.formatDistance('xHours', hours, localizeOptions);
 
-  // 1 up to 30 days
+    // 1 up to 30 days
   } else if (unit === 'd') {
-    var days = roundingMethodFn(minutes / MINUTES_IN_DAY)
-    return locale.formatDistance('xDays', days, localizeOptions)
+    var days = roundingMethodFn(minutes / MINUTES_IN_DAY);
+    return locale.formatDistance('xDays', days, localizeOptions);
 
-  // 1 up to 12 months
+    // 1 up to 12 months
   } else if (unit === 'M') {
-    var months = roundingMethodFn(minutes / MINUTES_IN_MONTH)
-    return locale.formatDistance('xMonths', months, localizeOptions)
+    var months = roundingMethodFn(minutes / MINUTES_IN_MONTH);
+    return locale.formatDistance('xMonths', months, localizeOptions);
 
-  // 1 year up to max Date
+    // 1 year up to max Date
   } else if (unit === 'Y') {
-    var years = roundingMethodFn(minutes / MINUTES_IN_YEAR)
-    return locale.formatDistance('xYears', years, localizeOptions)
+    var years = roundingMethodFn(minutes / MINUTES_IN_YEAR);
+    return locale.formatDistance('xYears', years, localizeOptions);
   }
 
-  throw new RangeError("unit must be 's', 'm', 'h', 'd', 'M' or 'Y'")
+  throw new RangeError("unit must be 's', 'm', 'h', 'd', 'M' or 'Y'");
 }
+module.exports = exports['default'];

@@ -1,5 +1,19 @@
-import toDate from '../toDate/index.js'
-import addDays from '../addDays/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setDay;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../addDays/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setDay
@@ -29,25 +43,26 @@ import addDays from '../addDays/index.js'
  * var result = setDay(new Date(2014, 8, 1), 0, {weekStartsOn: 1})
  * //=> Sun Sep 07 2014 00:00:00
  */
-export default function setDay (dirtyDate, dirtyDay, dirtyOptions) {
-  var options = dirtyOptions || {}
-  var locale = options.locale
-  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn
-  var defaultWeekStartsOn = localeWeekStartsOn === undefined ? 0 : Number(localeWeekStartsOn)
-  var weekStartsOn = options.weekStartsOn === undefined ? defaultWeekStartsOn : Number(options.weekStartsOn)
+function setDay(dirtyDate, dirtyDay, dirtyOptions) {
+  var options = dirtyOptions || {};
+  var locale = options.locale;
+  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
+  var defaultWeekStartsOn = localeWeekStartsOn === undefined ? 0 : Number(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn === undefined ? defaultWeekStartsOn : Number(options.weekStartsOn);
 
   // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively')
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
 
-  var date = toDate(dirtyDate, options)
-  var day = Number(dirtyDay)
-  var currentDay = date.getDay()
+  var date = (0, _index2.default)(dirtyDate, options);
+  var day = Number(dirtyDay);
+  var currentDay = date.getDay();
 
-  var remainder = day % 7
-  var dayIndex = (remainder + 7) % 7
+  var remainder = day % 7;
+  var dayIndex = (remainder + 7) % 7;
 
-  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay
-  return addDays(date, diff, options)
+  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
+  return (0, _index4.default)(date, diff, options);
 }
+module.exports = exports['default'];

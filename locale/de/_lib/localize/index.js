@@ -1,5 +1,18 @@
-import buildLocalizeFn from '../../../_lib/buildLocalizeFn/index.js'
-import buildLocalizeArrayFn from '../../../_lib/buildLocalizeArrayFn/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../../_lib/buildLocalizeFn/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../../../_lib/buildLocalizeArrayFn/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Note: in German, the names of days of the week and months are capitalized.
 // If you are making a new locale based on this one, check if the same is true for the language you're working on.
@@ -9,34 +22,35 @@ var weekdayValues = {
   narrow: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
   short: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
   long: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
-}
+};
 
 var monthValues = {
   short: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
   long: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
-}
+};
 
 var timeOfDayValues = {
   uppercase: ['AM', 'PM'],
   lowercase: ['am', 'pm'],
   long: ['a.m.', 'p.m.']
-}
+};
 
-function ordinalNumber (dirtyNumber) {
-  var number = Number(dirtyNumber)
-  return number + '.'
+function ordinalNumber(dirtyNumber) {
+  var number = Number(dirtyNumber);
+  return number + '.';
 }
 
 var localize = {
   ordinalNumber: ordinalNumber,
-  weekday: buildLocalizeFn(weekdayValues, 'long'),
-  weekdays: buildLocalizeArrayFn(weekdayValues, 'long'),
-  month: buildLocalizeFn(monthValues, 'long'),
-  months: buildLocalizeArrayFn(monthValues, 'long'),
-  timeOfDay: buildLocalizeFn(timeOfDayValues, 'long', function (hours) {
-    return (hours / 12) >= 1 ? 1 : 0
+  weekday: (0, _index2.default)(weekdayValues, 'long'),
+  weekdays: (0, _index4.default)(weekdayValues, 'long'),
+  month: (0, _index2.default)(monthValues, 'long'),
+  months: (0, _index4.default)(monthValues, 'long'),
+  timeOfDay: (0, _index2.default)(timeOfDayValues, 'long', function (hours) {
+    return hours / 12 >= 1 ? 1 : 0;
   }),
-  timesOfDay: buildLocalizeArrayFn(timeOfDayValues, 'long')
-}
+  timesOfDay: (0, _index4.default)(timeOfDayValues, 'long')
+};
 
-export default localize
+exports.default = localize;
+module.exports = exports['default'];

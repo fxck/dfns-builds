@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getISODay;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getISODay
@@ -22,13 +33,14 @@ import toDate from '../toDate/index.js'
  * var result = getISODay(new Date(2012, 1, 26))
  * //=> 7
  */
-export default function getISODay (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var day = date.getDay()
+function getISODay(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var day = date.getDay();
 
   if (day === 0) {
-    day = 7
+    day = 7;
   }
 
-  return day
+  return day;
 }
+module.exports = exports['default'];

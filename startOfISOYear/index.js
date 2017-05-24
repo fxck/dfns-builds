@@ -1,5 +1,19 @@
-import getISOYear from '../getISOYear/index.js'
-import startOfISOWeek from '../startOfISOWeek/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = startOfISOYear;
+
+var _index = require('../getISOYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../startOfISOWeek/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name startOfISOYear
@@ -24,11 +38,12 @@ import startOfISOWeek from '../startOfISOWeek/index.js'
  * var result = startOfISOYear(new Date(2005, 6, 2))
  * //=> Mon Jan 03 2005 00:00:00
  */
-export default function startOfISOYear (dirtyDate, dirtyOptions) {
-  var year = getISOYear(dirtyDate, dirtyOptions)
-  var fourthOfJanuary = new Date(0)
-  fourthOfJanuary.setFullYear(year, 0, 4)
-  fourthOfJanuary.setHours(0, 0, 0, 0)
-  var date = startOfISOWeek(fourthOfJanuary, dirtyOptions)
-  return date
+function startOfISOYear(dirtyDate, dirtyOptions) {
+  var year = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var fourthOfJanuary = new Date(0);
+  fourthOfJanuary.setFullYear(year, 0, 4);
+  fourthOfJanuary.setHours(0, 0, 0, 0);
+  var date = (0, _index4.default)(fourthOfJanuary, dirtyOptions);
+  return date;
 }
+module.exports = exports['default'];

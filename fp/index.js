@@ -1,3 +1,5 @@
+'use strict';
+
 // This file is generated automatically by `scripts/buildIndex.js`. Please, don't change it.
 
 module.exports = {
@@ -269,4 +271,4 @@ module.exports = {
   subYearsWithOptions: require('./subYearsWithOptions/index.js'),
   toDate: require('./toDate/index.js'),
   toDateWithOptions: require('./toDateWithOptions/index.js')
-}
+};

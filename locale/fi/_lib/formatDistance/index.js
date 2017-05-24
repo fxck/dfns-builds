@@ -1,25 +1,31 @@
-function futureSeconds (text) {
-  return text.replace(/sekuntia?/, 'sekunnin')
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
+function futureSeconds(text) {
+  return text.replace(/sekuntia?/, 'sekunnin');
 }
 
-function futureMinutes (text) {
-  return text.replace(/minuuttia?/, 'minuutin')
+function futureMinutes(text) {
+  return text.replace(/minuuttia?/, 'minuutin');
 }
 
-function futureHours (text) {
-  return text.replace(/tuntia?/, 'tunnin')
+function futureHours(text) {
+  return text.replace(/tuntia?/, 'tunnin');
 }
 
-function futureDays (text) {
-  return text.replace(/päivää?/, 'päivän')
+function futureDays(text) {
+  return text.replace(/päivää?/, 'päivän');
 }
 
-function futureMonths (text) {
-  return text.replace(/(kuukausi|kuukautta)/, 'kuukauden')
+function futureMonths(text) {
+  return text.replace(/(kuukausi|kuukautta)/, 'kuukauden');
 }
 
-function futureYears (text) {
-  return text.replace(/(vuosi|vuotta)/, 'vuoden')
+function futureYears(text) {
+  return text.replace(/(vuosi|vuotta)/, 'vuoden');
 }
 
 var formatDistanceLocale = {
@@ -38,8 +44,8 @@ var formatDistanceLocale = {
   halfAMinute: {
     one: 'puoli minuuttia',
     other: 'puoli minuuttia',
-    futureTense: function (text) {
-      return 'puolen minuutin'
+    futureTense: function futureTense(text) {
+      return 'puolen minuutin';
     }
   },
 
@@ -108,21 +114,22 @@ var formatDistanceLocale = {
     other: 'lähes {{count}} vuotta',
     futureTense: futureYears
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var distance = formatDistanceLocale[token]
-  var result = count === 1 ? distance.one : distance.other.replace('{{count}}', count)
+  var distance = formatDistanceLocale[token];
+  var result = count === 1 ? distance.one : distance.other.replace('{{count}}', count);
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
-      return distance.futureTense(result) + ' kuluttua'
+      return distance.futureTense(result) + ' kuluttua';
     } else {
-      return result + ' sitten'
+      return result + ' sitten';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

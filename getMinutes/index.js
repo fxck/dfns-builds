@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getMinutes;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getMinutes
@@ -19,8 +30,9 @@ import toDate from '../toDate/index.js'
  * var result = getMinutes(new Date(2012, 1, 29, 11, 45, 5))
  * //=> 45
  */
-export default function getMinutes (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var minutes = date.getMinutes()
-  return minutes
+function getMinutes(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var minutes = date.getMinutes();
+  return minutes;
 }
+module.exports = exports['default'];

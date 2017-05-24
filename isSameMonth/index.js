@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameMonth;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameMonth
@@ -23,9 +34,9 @@ import toDate from '../toDate/index.js'
  * )
  * //=> true
  */
-export default function isSameMonth (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeft = toDate(dirtyDateLeft, dirtyOptions)
-  var dateRight = toDate(dirtyDateRight, dirtyOptions)
-  return dateLeft.getFullYear() === dateRight.getFullYear() &&
-    dateLeft.getMonth() === dateRight.getMonth()
+function isSameMonth(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
+  return dateLeft.getFullYear() === dateRight.getFullYear() && dateLeft.getMonth() === dateRight.getMonth();
 }
+module.exports = exports['default'];

@@ -1,7 +1,18 @@
-import startOfDay from '../startOfDay/index.js'
+'use strict';
 
-var MILLISECONDS_IN_MINUTE = 60000
-var MILLISECONDS_IN_DAY = 86400000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInCalendarDays;
+
+var _index = require('../startOfDay/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_MINUTE = 60000;
+var MILLISECONDS_IN_DAY = 86400000;
 
 /**
  * @name differenceInCalendarDays
@@ -27,17 +38,16 @@ var MILLISECONDS_IN_DAY = 86400000
  * )
  * //=> 366
  */
-export default function differenceInCalendarDays (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var startOfDayLeft = startOfDay(dirtyDateLeft, dirtyOptions)
-  var startOfDayRight = startOfDay(dirtyDateRight, dirtyOptions)
+function differenceInCalendarDays(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var startOfDayLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var startOfDayRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var timestampLeft = startOfDayLeft.getTime() -
-    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-  var timestampRight = startOfDayRight.getTime() -
-    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+  var timestampLeft = startOfDayLeft.getTime() - startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
+  var timestampRight = startOfDayRight.getTime() - startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a day is not constant
   // (e.g. it's different in the day of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY);
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import differenceInDays from '../differenceInDays/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInWeeks;
+
+var _index = require('../differenceInDays/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInWeeks
@@ -23,7 +34,8 @@ import differenceInDays from '../differenceInDays/index.js'
  * )
  * //=> 2
  */
-export default function differenceInWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var diff = differenceInDays(dirtyDateLeft, dirtyDateRight, dirtyOptions) / 7
-  return diff > 0 ? Math.floor(diff) : Math.ceil(diff)
+function differenceInWeeks(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var diff = (0, _index2.default)(dirtyDateLeft, dirtyDateRight, dirtyOptions) / 7;
+  return diff > 0 ? Math.floor(diff) : Math.ceil(diff);
 }
+module.exports = exports['default'];

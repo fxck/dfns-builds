@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     one: 'bir saniyeden az',
@@ -65,38 +71,35 @@ var formatDistanceLocale = {
     one: 'neredeyse 1 yıl',
     other: 'neredeyse {{count}} yıl'
   }
-}
+};
 
-var extraWordTokens = [
-  'lessThanXSeconds',
-  'lessThanXMinutes',
-  'overXYears'
-]
+var extraWordTokens = ['lessThanXSeconds', 'lessThanXMinutes', 'overXYears'];
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var result
+  var result;
   if (typeof formatDistanceLocale[token] === 'string') {
-    result = formatDistanceLocale[token]
+    result = formatDistanceLocale[token];
   } else if (count === 1) {
-    result = formatDistanceLocale[token].one
+    result = formatDistanceLocale[token].one;
   } else {
-    result = formatDistanceLocale[token].other.replace('{{count}}', count)
+    result = formatDistanceLocale[token].other.replace('{{count}}', count);
   }
 
   if (options.addSuffix) {
-    var extraWord = ''
+    var extraWord = '';
     if (extraWordTokens.indexOf(token) > -1) {
-      extraWord = ' bir süre'
+      extraWord = ' bir süre';
     }
 
     if (options.comparison > 0) {
-      return result + extraWord + ' içinde'
+      return result + extraWord + ' içinde';
     } else {
-      return result + extraWord + ' önce'
+      return result + extraWord + ' önce';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

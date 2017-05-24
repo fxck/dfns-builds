@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addDays;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addDays
@@ -20,9 +31,10 @@ import toDate from '../toDate/index.js'
  * var result = addDays(new Date(2014, 8, 1), 10)
  * //=> Thu Sep 11 2014 00:00:00
  */
-export default function addDays (dirtyDate, dirtyAmount, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var amount = Number(dirtyAmount)
-  date.setDate(date.getDate() + amount)
-  return date
+function addDays(dirtyDate, dirtyAmount, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var amount = Number(dirtyAmount);
+  date.setDate(date.getDate() + amount);
+  return date;
 }
+module.exports = exports['default'];

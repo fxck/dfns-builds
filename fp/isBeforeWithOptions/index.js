@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../isBefore/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../isBefore/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var isBeforeWithOptions = (0, _index4.default)(_index2.default, 3);
 
-var isBeforeWithOptions = convertToFP(fn, 3)
-
-export default isBeforeWithOptions
+exports.default = isBeforeWithOptions;
+module.exports = exports['default'];

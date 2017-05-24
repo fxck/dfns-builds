@@ -1,4 +1,15 @@
-import getISOYear from '../getISOYear/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInCalendarISOYears;
+
+var _index = require('../getISOYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInCalendarISOYears
@@ -25,6 +36,7 @@ import getISOYear from '../getISOYear/index.js'
  * )
  * //=> 2
  */
-export default function differenceInCalendarISOYears (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  return getISOYear(dirtyDateLeft, dirtyOptions) - getISOYear(dirtyDateRight, dirtyOptions)
+function differenceInCalendarISOYears(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  return (0, _index2.default)(dirtyDateLeft, dirtyOptions) - (0, _index2.default)(dirtyDateRight, dirtyOptions);
 }
+module.exports = exports['default'];

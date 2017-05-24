@@ -1,14 +1,40 @@
-import compareAsc from '../compareAsc/index.js'
-import toDate from '../toDate/index.js'
-import differenceInSeconds from '../differenceInSeconds/index.js'
-import differenceInMonths from '../differenceInMonths/index.js'
-import cloneObject from '../_lib/cloneObject/index.js'
-import defaultLocale from '../locale/en-US/index.js'
+'use strict';
 
-var MINUTES_IN_DAY = 1440
-var MINUTES_IN_ALMOST_TWO_DAYS = 2520
-var MINUTES_IN_MONTH = 43200
-var MINUTES_IN_TWO_MONTHS = 86400
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
+
+var _index = require('../compareAsc/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../toDate/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../differenceInSeconds/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = require('../differenceInMonths/index.js');
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _index9 = require('../_lib/cloneObject/index.js');
+
+var _index10 = _interopRequireDefault(_index9);
+
+var _index11 = require('../locale/en-US/index.js');
+
+var _index12 = _interopRequireDefault(_index11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MINUTES_IN_DAY = 1440;
+var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
+var MINUTES_IN_MONTH = 43200;
+var MINUTES_IN_TWO_MONTHS = 86400;
 
 /**
  * @name formatDistance
@@ -96,114 +122,115 @@ var MINUTES_IN_TWO_MONTHS = 86400
  * )
  * //=> 'pli ol 1 jaro'
  */
-export default function formatDistance (dirtyDate, dirtyBaseDate, dirtyOptions) {
-  var options = dirtyOptions || {}
-  var locale = options.locale || defaultLocale
+function formatDistance(dirtyDate, dirtyBaseDate, dirtyOptions) {
+  var options = dirtyOptions || {};
+  var locale = options.locale || _index12.default;
 
   if (!locale.formatDistance) {
-    throw new RangeError('locale must contain formatDistance property')
+    throw new RangeError('locale must contain formatDistance property');
   }
 
-  var comparison = compareAsc(dirtyDate, dirtyBaseDate, options)
+  var comparison = (0, _index2.default)(dirtyDate, dirtyBaseDate, options);
 
   if (isNaN(comparison)) {
-    return 'Invalid Date'
+    return 'Invalid Date';
   }
 
-  var localizeOptions = cloneObject(options)
-  localizeOptions.addSuffix = Boolean(options.addSuffix)
-  localizeOptions.comparison = comparison
+  var localizeOptions = (0, _index10.default)(options);
+  localizeOptions.addSuffix = Boolean(options.addSuffix);
+  localizeOptions.comparison = comparison;
 
-  var dateLeft
-  var dateRight
+  var dateLeft;
+  var dateRight;
   if (comparison > 0) {
-    dateLeft = toDate(dirtyBaseDate, options)
-    dateRight = toDate(dirtyDate, options)
+    dateLeft = (0, _index4.default)(dirtyBaseDate, options);
+    dateRight = (0, _index4.default)(dirtyDate, options);
   } else {
-    dateLeft = toDate(dirtyDate, options)
-    dateRight = toDate(dirtyBaseDate, options)
+    dateLeft = (0, _index4.default)(dirtyDate, options);
+    dateRight = (0, _index4.default)(dirtyBaseDate, options);
   }
 
-  var seconds = differenceInSeconds(dateRight, dateLeft, options)
-  var offset = dateRight.getTimezoneOffset() - dateLeft.getTimezoneOffset()
-  var minutes = Math.round(seconds / 60) - offset
-  var months
+  var seconds = (0, _index6.default)(dateRight, dateLeft, options);
+  var offset = dateRight.getTimezoneOffset() - dateLeft.getTimezoneOffset();
+  var minutes = Math.round(seconds / 60) - offset;
+  var months;
 
   // 0 up to 2 mins
   if (minutes < 2) {
     if (options.includeSeconds) {
       if (seconds < 5) {
-        return locale.formatDistance('lessThanXSeconds', 5, localizeOptions)
+        return locale.formatDistance('lessThanXSeconds', 5, localizeOptions);
       } else if (seconds < 10) {
-        return locale.formatDistance('lessThanXSeconds', 10, localizeOptions)
+        return locale.formatDistance('lessThanXSeconds', 10, localizeOptions);
       } else if (seconds < 20) {
-        return locale.formatDistance('lessThanXSeconds', 20, localizeOptions)
+        return locale.formatDistance('lessThanXSeconds', 20, localizeOptions);
       } else if (seconds < 40) {
-        return locale.formatDistance('halfAMinute', null, localizeOptions)
+        return locale.formatDistance('halfAMinute', null, localizeOptions);
       } else if (seconds < 60) {
-        return locale.formatDistance('lessThanXMinutes', 1, localizeOptions)
+        return locale.formatDistance('lessThanXMinutes', 1, localizeOptions);
       } else {
-        return locale.formatDistance('xMinutes', 1, localizeOptions)
+        return locale.formatDistance('xMinutes', 1, localizeOptions);
       }
     } else {
       if (minutes === 0) {
-        return locale.formatDistance('lessThanXMinutes', 1, localizeOptions)
+        return locale.formatDistance('lessThanXMinutes', 1, localizeOptions);
       } else {
-        return locale.formatDistance('xMinutes', minutes, localizeOptions)
+        return locale.formatDistance('xMinutes', minutes, localizeOptions);
       }
     }
 
-  // 2 mins up to 0.75 hrs
+    // 2 mins up to 0.75 hrs
   } else if (minutes < 45) {
-    return locale.formatDistance('xMinutes', minutes, localizeOptions)
+    return locale.formatDistance('xMinutes', minutes, localizeOptions);
 
-  // 0.75 hrs up to 1.5 hrs
+    // 0.75 hrs up to 1.5 hrs
   } else if (minutes < 90) {
-    return locale.formatDistance('aboutXHours', 1, localizeOptions)
+    return locale.formatDistance('aboutXHours', 1, localizeOptions);
 
-  // 1.5 hrs up to 24 hrs
+    // 1.5 hrs up to 24 hrs
   } else if (minutes < MINUTES_IN_DAY) {
-    var hours = Math.round(minutes / 60)
-    return locale.formatDistance('aboutXHours', hours, localizeOptions)
+    var hours = Math.round(minutes / 60);
+    return locale.formatDistance('aboutXHours', hours, localizeOptions);
 
-  // 1 day up to 1.75 days
+    // 1 day up to 1.75 days
   } else if (minutes < MINUTES_IN_ALMOST_TWO_DAYS) {
-    return locale.formatDistance('xDays', 1, localizeOptions)
+    return locale.formatDistance('xDays', 1, localizeOptions);
 
-  // 1.75 days up to 30 days
+    // 1.75 days up to 30 days
   } else if (minutes < MINUTES_IN_MONTH) {
-    var days = Math.round(minutes / MINUTES_IN_DAY)
-    return locale.formatDistance('xDays', days, localizeOptions)
+    var days = Math.round(minutes / MINUTES_IN_DAY);
+    return locale.formatDistance('xDays', days, localizeOptions);
 
-  // 1 month up to 2 months
+    // 1 month up to 2 months
   } else if (minutes < MINUTES_IN_TWO_MONTHS) {
-    months = Math.round(minutes / MINUTES_IN_MONTH)
-    return locale.formatDistance('aboutXMonths', months, localizeOptions)
+    months = Math.round(minutes / MINUTES_IN_MONTH);
+    return locale.formatDistance('aboutXMonths', months, localizeOptions);
   }
 
-  months = differenceInMonths(dateRight, dateLeft, options)
+  months = (0, _index8.default)(dateRight, dateLeft, options);
 
   // 2 months up to 12 months
   if (months < 12) {
-    var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH)
-    return locale.formatDistance('xMonths', nearestMonth, localizeOptions)
+    var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH);
+    return locale.formatDistance('xMonths', nearestMonth, localizeOptions);
 
-  // 1 year up to max Date
+    // 1 year up to max Date
   } else {
-    var monthsSinceStartOfYear = months % 12
-    var years = Math.floor(months / 12)
+    var monthsSinceStartOfYear = months % 12;
+    var years = Math.floor(months / 12);
 
     // N years up to 1 years 3 months
     if (monthsSinceStartOfYear < 3) {
-      return locale.formatDistance('aboutXYears', years, localizeOptions)
+      return locale.formatDistance('aboutXYears', years, localizeOptions);
 
-    // N years 3 months up to N years 9 months
+      // N years 3 months up to N years 9 months
     } else if (monthsSinceStartOfYear < 9) {
-      return locale.formatDistance('overXYears', years, localizeOptions)
+      return locale.formatDistance('overXYears', years, localizeOptions);
 
-    // N years 9 months up to N year 12 months
+      // N years 9 months up to N year 12 months
     } else {
-      return locale.formatDistance('almostXYears', years + 1, localizeOptions)
+      return locale.formatDistance('almostXYears', years + 1, localizeOptions);
     }
   }
 }
+module.exports = exports['default'];

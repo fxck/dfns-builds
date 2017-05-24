@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     one: 'minder dan een seconde',
@@ -65,27 +71,28 @@ var formatDistanceLocale = {
     one: 'bijna 1 jaar',
     other: 'bijna {{count}} jaar'
   }
-}
+};
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var result
+  var result;
   if (typeof formatDistanceLocale[token] === 'string') {
-    result = formatDistanceLocale[token]
+    result = formatDistanceLocale[token];
   } else if (count === 1) {
-    result = formatDistanceLocale[token].one
+    result = formatDistanceLocale[token].one;
   } else {
-    result = formatDistanceLocale[token].other.replace('{{count}}', count)
+    result = formatDistanceLocale[token].other.replace('{{count}}', count);
   }
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
-      return 'over ' + result
+      return 'over ' + result;
     } else {
-      return result + ' geleden'
+      return result + ' geleden';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

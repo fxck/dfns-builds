@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import differenceInCalendarYears from '../differenceInCalendarYears/index.js'
-import compareAsc from '../compareAsc/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInYears;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../differenceInCalendarYears/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../compareAsc/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInYears
@@ -25,16 +42,17 @@ import compareAsc from '../compareAsc/index.js'
  * )
  * //=> 1
  */
-export default function differenceInYears (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeft = toDate(dirtyDateLeft, dirtyOptions)
-  var dateRight = toDate(dirtyDateRight, dirtyOptions)
+function differenceInYears(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var sign = compareAsc(dateLeft, dateRight, dirtyOptions)
-  var difference = Math.abs(differenceInCalendarYears(dateLeft, dateRight, dirtyOptions))
-  dateLeft.setFullYear(dateLeft.getFullYear() - sign * difference)
+  var sign = (0, _index6.default)(dateLeft, dateRight, dirtyOptions);
+  var difference = Math.abs((0, _index4.default)(dateLeft, dateRight, dirtyOptions));
+  dateLeft.setFullYear(dateLeft.getFullYear() - sign * difference);
 
   // Math.abs(diff in full years - diff in calendar years) === 1 if last calendar year is not full
   // If so, result must be decreased by 1 in absolute value
-  var isLastYearNotFull = compareAsc(dateLeft, dateRight, dirtyOptions) === -sign
-  return sign * (difference - isLastYearNotFull)
+  var isLastYearNotFull = (0, _index6.default)(dateLeft, dateRight, dirtyOptions) === -sign;
+  return sign * (difference - isLastYearNotFull);
 }
+module.exports = exports['default'];

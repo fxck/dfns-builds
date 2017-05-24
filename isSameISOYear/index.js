@@ -1,4 +1,15 @@
-import startOfISOYear from '../startOfISOYear/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameISOYear;
+
+var _index = require('../startOfISOYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameISOYear
@@ -25,9 +36,10 @@ import startOfISOYear from '../startOfISOYear/index.js'
  * )
  * //=> true
  */
-export default function isSameISOYear (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeftStartOfYear = startOfISOYear(dirtyDateLeft, dirtyOptions)
-  var dateRightStartOfYear = startOfISOYear(dirtyDateRight, dirtyOptions)
+function isSameISOYear(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeftStartOfYear = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRightStartOfYear = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  return dateLeftStartOfYear.getTime() === dateRightStartOfYear.getTime()
+  return dateLeftStartOfYear.getTime() === dateRightStartOfYear.getTime();
 }
+module.exports = exports['default'];

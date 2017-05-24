@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInCalendarMonths;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInCalendarMonths
@@ -23,12 +34,13 @@ import toDate from '../toDate/index.js'
  * )
  * //=> 8
  */
-export default function differenceInCalendarMonths (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeft = toDate(dirtyDateLeft, dirtyOptions)
-  var dateRight = toDate(dirtyDateRight, dirtyOptions)
+function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear()
-  var monthDiff = dateLeft.getMonth() - dateRight.getMonth()
+  var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
+  var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
 
-  return yearDiff * 12 + monthDiff
+  return yearDiff * 12 + monthDiff;
 }
+module.exports = exports['default'];

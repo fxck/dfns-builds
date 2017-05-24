@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildMatchFn;
 /**
  * @name buildMatchFn
  * @category Locale Helpers
@@ -23,12 +29,13 @@
  * locale.match.weekdays('Sunday', {type: 'narrow'}) //=> ['Su', 'Su', ...]
  * locale.match.weekdays('Sunday') //=> ['Sunday', 'Sunday', ...]
  */
-export default function buildMatchFn (patterns, defaultType) {
+function buildMatchFn(patterns, defaultType) {
   return function (dirtyString, dirtyOptions) {
-    var options = dirtyOptions || {}
-    var type = options.type ? String(options.type) : defaultType
-    var pattern = patterns[type] || patterns[defaultType]
-    var string = String(dirtyString)
-    return string.match(pattern)
-  }
+    var options = dirtyOptions || {};
+    var type = options.type ? String(options.type) : defaultType;
+    var pattern = patterns[type] || patterns[defaultType];
+    var string = String(dirtyString);
+    return string.match(pattern);
+  };
 }
+module.exports = exports["default"];

@@ -1,56 +1,70 @@
-import buildLocalizeFn from '../../../_lib/buildLocalizeFn/index.js'
-import buildLocalizeArrayFn from '../../../_lib/buildLocalizeArrayFn/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../../_lib/buildLocalizeFn/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../../../_lib/buildLocalizeArrayFn/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var weekdayValues = {
   narrow: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
   short: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'суб'],
   long: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота']
-}
+};
 
 var monthValues = {
   // http://new.gramota.ru/spravka/buro/search-answer?s=242637
   short: ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'],
   long: ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
-}
+};
 
 var timeOfDayValues = {
   long: ['ночи', 'утра', 'дня', 'вечера']
-}
+};
 
-function ordinalNumber (dirtyNumber, dirtyOptions) {
-  var options = dirtyOptions || {}
-  var unit = String(options.unit)
-  var suffix
+function ordinalNumber(dirtyNumber, dirtyOptions) {
+  var options = dirtyOptions || {};
+  var unit = String(options.unit);
+  var suffix;
 
   if (unit === 'dayOfMonth') {
-    suffix = '-е'
+    suffix = '-е';
   } else if (unit === 'isoWeek' || unit === 'week') {
-    suffix = '-я'
+    suffix = '-я';
   } else {
-    suffix = '-й'
+    suffix = '-й';
   }
 
-  return dirtyNumber + suffix
+  return dirtyNumber + suffix;
 }
 
 var localize = {
   ordinalNumber: ordinalNumber,
-  weekday: buildLocalizeFn(weekdayValues, 'long'),
-  weekdays: buildLocalizeArrayFn(weekdayValues, 'long'),
-  month: buildLocalizeFn(monthValues, 'long'),
-  months: buildLocalizeArrayFn(monthValues, 'long'),
-  timeOfDay: buildLocalizeFn(timeOfDayValues, 'long', function (hours) {
+  weekday: (0, _index2.default)(weekdayValues, 'long'),
+  weekdays: (0, _index4.default)(weekdayValues, 'long'),
+  month: (0, _index2.default)(monthValues, 'long'),
+  months: (0, _index4.default)(monthValues, 'long'),
+  timeOfDay: (0, _index2.default)(timeOfDayValues, 'long', function (hours) {
     if (hours >= 17) {
-      return 3
+      return 3;
     } else if (hours >= 12) {
-      return 2
+      return 2;
     } else if (hours >= 4) {
-      return 1
+      return 1;
     } else {
-      return 0
+      return 0;
     }
   }),
-  timesOfDay: buildLocalizeArrayFn(timeOfDayValues, 'long')
-}
+  timesOfDay: (0, _index4.default)(timeOfDayValues, 'long')
+};
 
-export default localize
+exports.default = localize;
+module.exports = exports['default'];

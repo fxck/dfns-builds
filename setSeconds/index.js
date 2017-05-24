@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setSeconds;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setSeconds
@@ -20,9 +31,10 @@ import toDate from '../toDate/index.js'
  * var result = setSeconds(new Date(2014, 8, 1, 11, 30, 40), 45)
  * //=> Mon Sep 01 2014 11:30:45
  */
-export default function setSeconds (dirtyDate, dirtySeconds, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var seconds = Number(dirtySeconds)
-  date.setSeconds(seconds)
-  return date
+function setSeconds(dirtyDate, dirtySeconds, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var seconds = Number(dirtySeconds);
+  date.setSeconds(seconds);
+  return date;
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = compareDesc;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name compareDesc
@@ -37,18 +48,19 @@ import toDate from '../toDate/index.js'
  * //   Wed Feb 11 1987 00:00:00
  * // ]
  */
-export default function compareDesc (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeft = toDate(dirtyDateLeft, dirtyOptions)
-  var dateRight = toDate(dirtyDateRight, dirtyOptions)
+function compareDesc(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var diff = dateLeft.getTime() - dateRight.getTime()
+  var diff = dateLeft.getTime() - dateRight.getTime();
 
   if (diff > 0) {
-    return -1
+    return -1;
   } else if (diff < 0) {
-    return 1
-  // Return 0 if diff is 0; return NaN if diff is NaN
+    return 1;
+    // Return 0 if diff is 0; return NaN if diff is NaN
   } else {
-    return diff
+    return diff;
   }
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getYear
@@ -19,8 +30,9 @@ import toDate from '../toDate/index.js'
  * var result = getYear(new Date(2014, 6, 2))
  * //=> 2014
  */
-export default function getYear (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var year = date.getFullYear()
-  return year
+function getYear(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var year = date.getFullYear();
+  return year;
 }
+module.exports = exports['default'];

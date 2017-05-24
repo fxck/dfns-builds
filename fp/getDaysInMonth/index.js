@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../getDaysInMonth/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../getDaysInMonth/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var getDaysInMonth = (0, _index4.default)(_index2.default, 1);
 
-var getDaysInMonth = convertToFP(fn, 1)
-
-export default getDaysInMonth
+exports.default = getDaysInMonth;
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import addDays from '../addDays/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = addWeeks;
+
+var _index = require('../addDays/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name addWeeks
@@ -20,8 +31,9 @@ import addDays from '../addDays/index.js'
  * var result = addWeeks(new Date(2014, 8, 1), 4)
  * //=> Mon Sep 29 2014 00:00:00
  */
-export default function addWeeks (dirtyDate, dirtyAmount, dirtyOptions) {
-  var amount = Number(dirtyAmount)
-  var days = amount * 7
-  return addDays(dirtyDate, days, dirtyOptions)
+function addWeeks(dirtyDate, dirtyAmount, dirtyOptions) {
+  var amount = Number(dirtyAmount);
+  var days = amount * 7;
+  return (0, _index2.default)(dirtyDate, days, dirtyOptions);
 }
+module.exports = exports['default'];

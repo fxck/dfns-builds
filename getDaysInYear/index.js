@@ -1,5 +1,19 @@
-import toDate from '../toDate/index.js'
-import isLeapYear from '../isLeapYear/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getDaysInYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../isLeapYear/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name getDaysInYear
@@ -20,12 +34,13 @@ import isLeapYear from '../isLeapYear/index.js'
  * var result = getDaysInYear(new Date(2012, 0, 1))
  * //=> 366
  */
-export default function getDaysInYear (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
+function getDaysInYear(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
 
   if (isNaN(date)) {
-    return NaN
+    return NaN;
   }
 
-  return isLeapYear(date, dirtyOptions) ? 366 : 365
+  return (0, _index4.default)(date, dirtyOptions) ? 366 : 365;
 }
+module.exports = exports['default'];

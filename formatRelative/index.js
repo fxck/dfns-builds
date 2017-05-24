@@ -1,8 +1,31 @@
-import toDate from '../toDate/index.js'
-import format from '../format/index.js'
-import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
-import defaultLocale from '../locale/en-US/index.js'
-import subMinutes from '../subMinutes/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatRelative;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../format/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../differenceInCalendarDays/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = require('../locale/en-US/index.js');
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _index9 = require('../subMinutes/index.js');
+
+var _index10 = _interopRequireDefault(_index9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name formatRelative
@@ -31,50 +54,51 @@ import subMinutes from '../subMinutes/index.js'
  * @throws {RangeError} `options.locale` must contain `formatLong` property
  * @throws {RangeError} `options.locale` must contain `formatRelative` property
  */
-export default function formatRelative (dirtyDate, dirtyBaseDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var baseDate = toDate(dirtyBaseDate, dirtyOptions)
+function formatRelative(dirtyDate, dirtyBaseDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var baseDate = (0, _index2.default)(dirtyBaseDate, dirtyOptions);
 
-  var options = dirtyOptions || {}
-  var locale = options.locale || defaultLocale
+  var options = dirtyOptions || {};
+  var locale = options.locale || _index8.default;
 
   if (!locale.localize) {
-    throw new RangeError('locale must contain localize property')
+    throw new RangeError('locale must contain localize property');
   }
 
   if (!locale.formatLong) {
-    throw new RangeError('locale must contain formatLong property')
+    throw new RangeError('locale must contain formatLong property');
   }
 
   if (!locale.formatRelative) {
-    throw new RangeError('locale must contain formatRelative property')
+    throw new RangeError('locale must contain formatRelative property');
   }
 
-  var diff = differenceInCalendarDays(date, baseDate, options)
+  var diff = (0, _index6.default)(date, baseDate, options);
 
   if (isNaN(diff)) {
-    return 'Invalid Date'
+    return 'Invalid Date';
   }
 
-  var token
+  var token;
   if (diff < -6) {
-    token = 'other'
+    token = 'other';
   } else if (diff < -1) {
-    token = 'lastWeek'
+    token = 'lastWeek';
   } else if (diff < 0) {
-    token = 'yesterday'
+    token = 'yesterday';
   } else if (diff < 1) {
-    token = 'today'
+    token = 'today';
   } else if (diff < 2) {
-    token = 'tomorrow'
+    token = 'tomorrow';
   } else if (diff < 7) {
-    token = 'nextWeek'
+    token = 'nextWeek';
   } else {
-    token = 'other'
+    token = 'other';
   }
 
-  var utcDate = subMinutes(date, date.getTimezoneOffset(), options)
-  var utcBaseDate = subMinutes(baseDate, date.getTimezoneOffset(), options)
-  var formatStr = locale.formatRelative(token, utcDate, utcBaseDate, options)
-  return format(date, formatStr, options)
+  var utcDate = (0, _index10.default)(date, date.getTimezoneOffset(), options);
+  var utcBaseDate = (0, _index10.default)(baseDate, date.getTimezoneOffset(), options);
+  var formatStr = locale.formatRelative(token, utcDate, utcBaseDate, options);
+  return (0, _index4.default)(date, formatStr, options);
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import startOfHour from '../startOfHour/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameHour;
+
+var _index = require('../startOfHour/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameHour
@@ -23,9 +34,10 @@ import startOfHour from '../startOfHour/index.js'
  * )
  * //=> true
  */
-export default function isSameHour (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeftStartOfHour = startOfHour(dirtyDateLeft, dirtyOptions)
-  var dateRightStartOfHour = startOfHour(dirtyDateRight, dirtyOptions)
+function isSameHour(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeftStartOfHour = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRightStartOfHour = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  return dateLeftStartOfHour.getTime() === dateRightStartOfHour.getTime()
+  return dateLeftStartOfHour.getTime() === dateRightStartOfHour.getTime();
 }
+module.exports = exports['default'];

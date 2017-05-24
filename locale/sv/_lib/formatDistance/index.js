@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatDistance;
 var formatDistanceLocale = {
   lessThanXSeconds: {
     singular: 'mindre än en sekund',
@@ -65,44 +71,31 @@ var formatDistanceLocale = {
     singular: 'nästan ett år',
     plural: 'nästan {{count}} år'
   }
-}
+};
 
-var wordMapping = [
-  'noll',
-  'en',
-  'två',
-  'tre',
-  'fyra',
-  'fem',
-  'sex',
-  'sju',
-  'åtta',
-  'nio',
-  'tio',
-  'elva',
-  'tolv'
-]
+var wordMapping = ['noll', 'en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'];
 
-export default function formatDistance (token, count, options) {
-  options = options || {}
+function formatDistance(token, count, options) {
+  options = options || {};
 
-  var translation = formatDistanceLocale[token]
-  var result
+  var translation = formatDistanceLocale[token];
+  var result;
   if (typeof translation === 'string') {
-    result = translation
+    result = translation;
   } else if (count === 0 || count > 1) {
-    result = translation.plural.replace('{{count}}', count < 13 ? wordMapping[count] : count)
+    result = translation.plural.replace('{{count}}', count < 13 ? wordMapping[count] : count);
   } else {
-    result = translation.singular
+    result = translation.singular;
   }
 
   if (options.addSuffix) {
     if (options.comparison > 0) {
-      return 'om ' + result
+      return 'om ' + result;
     } else {
-      return result + ' sedan'
+      return result + ' sedan';
     }
   }
 
-  return result
+  return result;
 }
+module.exports = exports['default'];

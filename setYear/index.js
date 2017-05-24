@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setYear;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setYear
@@ -20,15 +31,16 @@ import toDate from '../toDate/index.js'
  * var result = setYear(new Date(2014, 8, 1), 2013)
  * //=> Sun Sep 01 2013 00:00:00
  */
-export default function setYear (dirtyDate, dirtyYear, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var year = Number(dirtyYear)
+function setYear(dirtyDate, dirtyYear, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var year = Number(dirtyYear);
 
   // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
   if (isNaN(date)) {
-    return new Date(NaN)
+    return new Date(NaN);
   }
 
-  date.setFullYear(year)
-  return date
+  date.setFullYear(year);
+  return date;
 }
+module.exports = exports['default'];

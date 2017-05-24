@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildParseFn;
 /**
  * @name buildParseFn
  * @category Locale Helpers
@@ -20,15 +26,16 @@
  * var matchResult = locale.match.weekdays('Friday')
  * locale.match.weekday(matchResult) //=> 5
  */
-export default function buildParseFn (patterns, defaultType) {
+function buildParseFn(patterns, defaultType) {
   return function (matchResult, dirtyOptions) {
-    var options = dirtyOptions || {}
-    var type = options.type ? String(options.type) : defaultType
-    var patternsArray = patterns[type] || patterns[defaultType]
-    var string = matchResult[1]
+    var options = dirtyOptions || {};
+    var type = options.type ? String(options.type) : defaultType;
+    var patternsArray = patterns[type] || patterns[defaultType];
+    var string = matchResult[1];
 
     return patternsArray.findIndex(function (pattern) {
-      return pattern.test(string)
-    })
-  }
+      return pattern.test(string);
+    });
+  };
 }
+module.exports = exports["default"];

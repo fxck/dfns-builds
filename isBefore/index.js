@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isBefore;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isBefore
@@ -20,8 +31,9 @@ import toDate from '../toDate/index.js'
  * var result = isBefore(new Date(1989, 6, 10), new Date(1987, 1, 11))
  * //=> false
  */
-export default function isBefore (dirtyDate, dirtyDateToCompare, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var dateToCompare = toDate(dirtyDateToCompare, dirtyOptions)
-  return date.getTime() < dateToCompare.getTime()
+function isBefore(dirtyDate, dirtyDateToCompare, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var dateToCompare = (0, _index2.default)(dirtyDateToCompare, dirtyOptions);
+  return date.getTime() < dateToCompare.getTime();
 }
+module.exports = exports['default'];

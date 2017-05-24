@@ -1,4 +1,15 @@
-import startOfSecond from '../startOfSecond/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isSameSecond;
+
+var _index = require('../startOfSecond/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name isSameSecond
@@ -24,9 +35,10 @@ import startOfSecond from '../startOfSecond/index.js'
  * )
  * //=> true
  */
-export default function isSameSecond (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeftStartOfSecond = startOfSecond(dirtyDateLeft, dirtyOptions)
-  var dateRightStartOfSecond = startOfSecond(dirtyDateRight, dirtyOptions)
+function isSameSecond(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeftStartOfSecond = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRightStartOfSecond = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  return dateLeftStartOfSecond.getTime() === dateRightStartOfSecond.getTime()
+  return dateLeftStartOfSecond.getTime() === dateRightStartOfSecond.getTime();
 }
+module.exports = exports['default'];

@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = lastDayOfQuarter;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name lastDayOfQuarter
@@ -20,11 +31,12 @@ import toDate from '../toDate/index.js'
  * var result = lastDayOfQuarter(new Date(2014, 8, 2, 11, 55, 0))
  * //=> Tue Sep 30 2014 00:00:00
  */
-export default function lastDayOfQuarter (dirtyDate, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var currentMonth = date.getMonth()
-  var month = currentMonth - currentMonth % 3 + 3
-  date.setMonth(month, 0)
-  date.setHours(0, 0, 0, 0)
-  return date
+function lastDayOfQuarter(dirtyDate, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var currentMonth = date.getMonth();
+  var month = currentMonth - currentMonth % 3 + 3;
+  date.setMonth(month, 0);
+  date.setHours(0, 0, 0, 0);
+  return date;
 }
+module.exports = exports['default'];

@@ -1,5 +1,19 @@
-import toDate from '../toDate/index.js'
-import getISOWeek from '../getISOWeek/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setISOWeek;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../getISOWeek/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name setISOWeek
@@ -23,10 +37,11 @@ import getISOWeek from '../getISOWeek/index.js'
  * var result = setISOWeek(new Date(2004, 7, 7), 53)
  * //=> Sat Jan 01 2005 00:00:00
  */
-export default function setISOWeek (dirtyDate, dirtyISOWeek, dirtyOptions) {
-  var date = toDate(dirtyDate, dirtyOptions)
-  var isoWeek = Number(dirtyISOWeek)
-  var diff = getISOWeek(date, dirtyOptions) - isoWeek
-  date.setDate(date.getDate() - diff * 7)
-  return date
+function setISOWeek(dirtyDate, dirtyISOWeek, dirtyOptions) {
+  var date = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var isoWeek = Number(dirtyISOWeek);
+  var diff = (0, _index4.default)(date, dirtyOptions) - isoWeek;
+  date.setDate(date.getDate() - diff * 7);
+  return date;
 }
+module.exports = exports['default'];

@@ -1,7 +1,18 @@
-import startOfWeek from '../startOfWeek/index.js'
+'use strict';
 
-var MILLISECONDS_IN_MINUTE = 60000
-var MILLISECONDS_IN_WEEK = 604800000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInCalendarWeeks;
+
+var _index = require('../startOfWeek/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_MINUTE = 60000;
+var MILLISECONDS_IN_WEEK = 604800000;
 
 /**
  * @name differenceInCalendarWeeks
@@ -39,17 +50,16 @@ var MILLISECONDS_IN_WEEK = 604800000
  * )
  * //=> 2
  */
-export default function differenceInCalendarWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var startOfWeekLeft = startOfWeek(dirtyDateLeft, dirtyOptions)
-  var startOfWeekRight = startOfWeek(dirtyDateRight, dirtyOptions)
+function differenceInCalendarWeeks(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var startOfWeekLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var startOfWeekRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var timestampLeft = startOfWeekLeft.getTime() -
-    startOfWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-  var timestampRight = startOfWeekRight.getTime() -
-    startOfWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+  var timestampLeft = startOfWeekLeft.getTime() - startOfWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
+  var timestampRight = startOfWeekRight.getTime() - startOfWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK);
 }
+module.exports = exports['default'];

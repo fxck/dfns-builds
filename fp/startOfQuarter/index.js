@@ -1,8 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('../../startOfQuarter/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../_lib/convertToFP/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // This file is generated automatically by `scripts/buildFP.js`. Please, don't change it.
 
-import fn from '../../startOfQuarter/index.js'
-import convertToFP from '../_lib/convertToFP/index.js'
+var startOfQuarter = (0, _index4.default)(_index2.default, 1);
 
-var startOfQuarter = convertToFP(fn, 1)
-
-export default startOfQuarter
+exports.default = startOfQuarter;
+module.exports = exports['default'];

@@ -1,6 +1,23 @@
-import toDate from '../toDate/index.js'
-import differenceInCalendarDays from '../differenceInCalendarDays/index.js'
-import compareAsc from '../compareAsc/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInDays;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../differenceInCalendarDays/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _index5 = require('../compareAsc/index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name differenceInDays
@@ -26,16 +43,17 @@ import compareAsc from '../compareAsc/index.js'
  * )
  * //=> 365
  */
-export default function differenceInDays (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var dateLeft = toDate(dirtyDateLeft, dirtyOptions)
-  var dateRight = toDate(dirtyDateRight, dirtyOptions)
+function differenceInDays(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var dateLeft = (0, _index2.default)(dirtyDateLeft, dirtyOptions);
+  var dateRight = (0, _index2.default)(dirtyDateRight, dirtyOptions);
 
-  var sign = compareAsc(dateLeft, dateRight, dirtyOptions)
-  var difference = Math.abs(differenceInCalendarDays(dateLeft, dateRight, dirtyOptions))
-  dateLeft.setDate(dateLeft.getDate() - sign * difference)
+  var sign = (0, _index6.default)(dateLeft, dateRight, dirtyOptions);
+  var difference = Math.abs((0, _index4.default)(dateLeft, dateRight, dirtyOptions));
+  dateLeft.setDate(dateLeft.getDate() - sign * difference);
 
   // Math.abs(diff in full days - diff in calendar days) === 1 if last calendar day is not full
   // If so, result must be decreased by 1 in absolute value
-  var isLastDayNotFull = compareAsc(dateLeft, dateRight, dirtyOptions) === -sign
-  return sign * (difference - isLastDayNotFull)
+  var isLastDayNotFull = (0, _index6.default)(dateLeft, dateRight, dirtyOptions) === -sign;
+  return sign * (difference - isLastDayNotFull);
 }
+module.exports = exports['default'];

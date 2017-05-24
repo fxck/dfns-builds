@@ -1,4 +1,15 @@
-import toDate from '../toDate/index.js'
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = max;
+
+var _index = require('../toDate/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name max
@@ -26,10 +37,11 @@ import toDate from '../toDate/index.js'
  * )
  * //=> Sun Jul 02 1995 00:00:00
  */
-export default function max (datesArray, dirtyOptions) {
+function max(datesArray, dirtyOptions) {
   var dates = datesArray.map(function (dirtyDate) {
-    return toDate(dirtyDate, dirtyOptions)
-  })
-  var latestTimestamp = Math.max.apply(null, dates)
-  return new Date(latestTimestamp)
+    return (0, _index2.default)(dirtyDate, dirtyOptions);
+  });
+  var latestTimestamp = Math.max.apply(null, dates);
+  return new Date(latestTimestamp);
 }
+module.exports = exports['default'];

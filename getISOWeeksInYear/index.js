@@ -1,7 +1,21 @@
-import startOfISOYear from '../startOfISOYear/index.js'
-import addWeeks from '../addWeeks/index.js'
+'use strict';
 
-var MILLISECONDS_IN_WEEK = 604800000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getISOWeeksInYear;
+
+var _index = require('../startOfISOYear/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('../addWeeks/index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_WEEK = 604800000;
 
 /**
  * @name getISOWeeksInYear
@@ -24,12 +38,13 @@ var MILLISECONDS_IN_WEEK = 604800000
  * var result = getISOWeeksInYear(new Date(2015, 1, 11))
  * //=> 53
  */
-export default function getISOWeeksInYear (dirtyDate, dirtyOptions) {
-  var thisYear = startOfISOYear(dirtyDate, dirtyOptions)
-  var nextYear = startOfISOYear(addWeeks(thisYear, 60, dirtyOptions), dirtyOptions)
-  var diff = nextYear.valueOf() - thisYear.valueOf()
+function getISOWeeksInYear(dirtyDate, dirtyOptions) {
+  var thisYear = (0, _index2.default)(dirtyDate, dirtyOptions);
+  var nextYear = (0, _index2.default)((0, _index4.default)(thisYear, 60, dirtyOptions), dirtyOptions);
+  var diff = nextYear.valueOf() - thisYear.valueOf();
   // Round the number of weeks to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round(diff / MILLISECONDS_IN_WEEK)
+  return Math.round(diff / MILLISECONDS_IN_WEEK);
 }
+module.exports = exports['default'];

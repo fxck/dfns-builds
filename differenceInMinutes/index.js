@@ -1,6 +1,17 @@
-import differenceInMilliseconds from '../differenceInMilliseconds/index.js'
+'use strict';
 
-var MILLISECONDS_IN_MINUTE = 60000
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = differenceInMinutes;
+
+var _index = require('../differenceInMilliseconds/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MILLISECONDS_IN_MINUTE = 60000;
 
 /**
  * @name differenceInMinutes
@@ -25,7 +36,8 @@ var MILLISECONDS_IN_MINUTE = 60000
  * )
  * //=> 12
  */
-export default function differenceInMinutes (dirtyDateLeft, dirtyDateRight, dirtyOptions) {
-  var diff = differenceInMilliseconds(dirtyDateLeft, dirtyDateRight, dirtyOptions) / MILLISECONDS_IN_MINUTE
-  return diff > 0 ? Math.floor(diff) : Math.ceil(diff)
+function differenceInMinutes(dirtyDateLeft, dirtyDateRight, dirtyOptions) {
+  var diff = (0, _index2.default)(dirtyDateLeft, dirtyDateRight, dirtyOptions) / MILLISECONDS_IN_MINUTE;
+  return diff > 0 ? Math.floor(diff) : Math.ceil(diff);
 }
+module.exports = exports['default'];
